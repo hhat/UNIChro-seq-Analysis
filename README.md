@@ -50,8 +50,21 @@ All such results are typically placed in the `results/` directory.
 ## Demo Dataset Structure
 A possible repository structure for this demo is:
 
-caQTL_demo/ ├── data/ │ ├── dna_counts.tsv │ ├── atac_counts.tsv │ └── README_data.md ├── scripts/ │ ├── glm_modeling.py │ ├── meta_analysis.py │ └── README_scripts.md ├── results/ │ ├── caQTL_effects.tsv │ ├── forest_plot.png │ ├── edit_bias_analysis.tsv │ └── README_results.md └── README.md
-
+demo/
+├── data/
+│   ├── dna_counts.tsv
+│   ├── atac_counts.tsv
+│   └── README_data.md
+├── scripts/
+│   ├── glm_modeling.py
+│   ├── meta_analysis.py
+│   └── README_scripts.md
+├── results/
+│   ├── caQTL_effects.tsv
+│   ├── forest_plot.png
+│   ├── edit_bias_analysis.tsv
+│   └── README_results.md
+└── README.md
 
 - **`data/`**  
   - `dna_counts.tsv`: Probe-based DNA-seq allele counts  
