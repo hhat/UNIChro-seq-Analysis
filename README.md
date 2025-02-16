@@ -1,118 +1,69 @@
-# Identification of caQTL Effects and Validation of Edit Bias
+# README: GLM with an Offset Using DNA-seq Ratio
 
-## Project Purpose
-This project aims to identify **chromatin accessibility QTLs (caQTLs)** and verify that observed allele-specific accessibility is not due to technical artifacts (referred to as “edit bias”). We combine data from **probe-based DNA-seq** and **probe-based ATAC-seq**, both targeting the same genomic sites, to evaluate how genetic variants (e.g., SNPs) influence chromatin accessibility.
+This repository provides an R script that uses **DNA-seq allele counts** (with columns `REF, ALT`) as an offset in a logistic regression, allowing for the detection of **allele-specific accessibility biases** in **ATAC-seq** data (with columns `ref, alt`). 
 
-## Data Used
-- **Probe-based DNA-seq Count Data**  
-  Counts of reference and alternate alleles obtained via targeted DNA sequencing using probes. This serves as a baseline for the true allele frequency.
+---
 
-- **Probe-based ATAC-seq Count Data**  
-  Counts of reference and alternate alleles from ATAC-seq (which measures chromatin accessibility), collected with the same probe-based approach for the same genomic regions as DNA-seq. By comparing both datasets, we can assess whether accessibility differs significantly by allele.
+## Script Overview
 
-All count data are located in the `data/` directory (see the **Demo Dataset Structure** below for details).
+- **Script Name:** `glm_modeling_offset.R`
+- **Goal:**
+  1. Account for DNA-seq allele ratios (which might not be 50:50) by using them as an **offset**.
+  2. Perform logistic regression on ATAC-seq (`ref, alt`) counts to estimate **caQTL effects** (allelic imbalance) relative to the DNA-seq baseline.
 
-## Analysis Steps
+- **Column Naming Convention:**
+  - **DNA-seq:** `SNP, REF, ALT` (uppercase)
+  - **ATAC-seq:** `SNP, ref, alt` (lowercase)
+  - Both contain a common column, `SNP`, used for joining the data frames.
 
-1. **Data Preprocessing**  
-   - Merge DNA-seq and ATAC-seq count data. For each SNP (or genomic locus), compile the reference and alternate allele reads.  
-   - Filter out low-coverage or poor-quality entries as needed.
+- **GLM Model (Conceptual):**  
+  \[
+    \mathrm{cbind}( alt_{\mathrm{ATAC}},\ ref_{\mathrm{ATAC}} ) 
+    \sim 1\ +\ \mathrm{offset}\Bigl(\logit\Bigl(\frac{ALT_{\mathrm{DNA}}}{REF_{\mathrm{DNA}} + ALT_{\mathrm{DNA}}}\Bigr)\Bigr)
+  \]  
+  - Here, the **intercept** captures how much the ATAC-seq ratio deviates from the DNA-seq ratio.
 
-2. **GLM Modeling**  
-   - Use a **generalized linear model (GLM)** for each SNP to test for allele-specific accessibility.  
-   - For instance, compare the ratio of reference vs. alternate reads in ATAC-seq against the expected 50:50 ratio from DNA-seq using logistic regression.
+---
 
-3. **Statistical Significance**  
-   - Extract effect sizes (e.g., odds ratios, log odds) and p-values from the GLM, then apply multiple-testing correction.  
-   - Sites passing the significance threshold are flagged as potential caQTLs.
+## Input Data Example
 
-4. **Meta-Analysis** (if required)  
-   - If multiple samples or conditions exist, aggregate effect sizes across datasets using meta-analysis (e.g., a random-effects model).  
-   - This approach accounts for between-sample variability and produces a combined effect estimate.
+### DNA-seq (`dna_counts.tsv`)
 
-5. **Edit Bias Validation**  
-   - For each significant caQTL, verify that DNA-seq does not exhibit a similar allele imbalance.  
-   - If DNA-seq and ATAC-seq both show the same allele bias, it may indicate a technical artifact (edit bias). Those sites can be excluded or re-evaluated.
+| SNP   | REF  | ALT  |
+|-------|------|------|
+| rs001 | 100  | 130  |
+| rs002 |  80  |  90  |
+| ...   | ...  | ...  |
 
-## Output Results
-- **List of Detected caQTLs**  
-  A table (e.g., `caQTL_effects.tsv`) with effect sizes, p-values, and significance indicators for each SNP.
+- `REF`: Reference allele read count  
+- `ALT`: Alternate allele read count  
 
-- **Forest Plot**  
-  A visualization (e.g., `forest_plot.png`) showing effect sizes and confidence intervals across multiple samples/conditions, and the combined meta-analysis result.
+### ATAC-seq (`atac_counts.tsv`)
 
-- **Edit Bias Analysis**  
-  A table (e.g., `edit_bias_analysis.tsv`) comparing DNA-seq and ATAC-seq allele frequencies to confirm no inherent bias.  
-  - If DNA-seq reads are near a 50:50 split but ATAC-seq shows a strong imbalance, it suggests a true allele-specific accessibility signal.
+| SNP   | ref  | alt  |
+|-------|------|------|
+| rs001 |  50  |  60  |
+| rs002 |  40  |  50  |
+| ...   | ...  | ...  |
 
-All such results are typically placed in the `results/` directory.
+- `ref`: Reference allele read count  
+- `alt`: Alternate allele read count  
 
-## Demo Dataset Structure
-A possible repository structure for this demo is:
+---
 
-demo/
-├── data/
-│   ├── dna_counts.tsv
-│   ├── atac_counts.tsv
-│   └── README_data.md
-├── scripts/
-│   ├── glm_modeling.py
-│   ├── meta_analysis.py
-│   └── README_scripts.md
-├── results/
-│   ├── caQTL_effects.tsv
-│   ├── forest_plot.png
-│   ├── edit_bias_analysis.tsv
-│   └── README_results.md
-└── README.md
+## How to Run the Script
 
-- **`data/`**  
-  - `dna_counts.tsv`: Probe-based DNA-seq allele counts  
-  - `atac_counts.tsv`: Probe-based ATAC-seq allele counts  
-  - There may be multiple files for larger analyses or multiple samples.
+1. **Install Dependencies**
 
-- **`scripts/`**  
-  - `glm_modeling.py`: Runs GLM for identifying candidate caQTLs  
-  - `meta_analysis.py`: Consolidates GLM results, performs meta-analysis, and generates forest plots  
-  - Depending on your workflow, you might have R scripts or shell scripts instead.
+   - **R** (version 3.6 or later recommended)
+   - **CRAN Packages**: `dplyr`, `tidyr`
+     ```r
+     install.packages(c("dplyr", "tidyr"))
+     ```
 
-- **`results/`**  
-  - `caQTL_effects.tsv`: Summarized effects and statistics from GLM or meta-analysis  
-  - `forest_plot.png`: Forest plot visualization of effect sizes  
-  - `edit_bias_analysis.tsv`: Comparison of DNA-seq allele frequencies, indicating potential biases  
-
-## Quick Start Guide
-
-1. **Clone the repository**:
+2. **Execute the Script**
    ```bash
-   git clone https://github.com/your_account/caQTL_demo.git
-   cd caQTL_demo
-Install dependencies:
-
-pip install -r requirements.txt
-(Adjust as needed for your environment; Python 3.x is recommended.)
-
-Run the GLM Modeling:
-
-python scripts/glm_modeling.py \
-    --dna data/dna_counts.tsv \
-    --atac data/atac_counts.tsv \
-    --output results/glm_results.tsv
-Meta-Analysis & Edit Bias Check:
-
-python scripts/meta_analysis.py \
-    --glm results/glm_results.tsv \
-    --dna data/dna_counts.tsv \
-    --output_dir results/
-Review Outputs:
-
-Inspect the results/ directory for files like caQTL_effects.tsv, forest_plot.png, and edit_bias_analysis.tsv.
-Check which SNPs show significant caQTL signals and verify any potential bias.
-License
-Unless otherwise noted, the scripts and data in this demo repository are available under the MIT License.
-If third-party data or code is included, please refer to their respective licenses.
-
-Contact
-For questions or bug reports, please open an Issue on GitHub.
-You may also contact us via email at:
-your_email@example.com
+   Rscript glm_modeling_offset.R \
+       --dna data/dna_counts.tsv \
+       --atac data/atac_counts.tsv \
+       --output results/glm_results.tsv
