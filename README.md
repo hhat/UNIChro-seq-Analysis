@@ -6,7 +6,7 @@ This repository provides an R script that uses **DNA-seq allele counts** (with c
 
 ## Script Overview
 
-- **Script Name:** `glm_modeling_offset.R`
+- **Script Name:** `bidirectional_edit_analysis.R`
 - **Goal:**
   1. Account for DNA-seq allele ratios (which might not be 50:50) by using them as an **offset**.
   2. Perform logistic regression on ATAC-seq (`ref, alt`) counts to estimate **caQTL effects** (allelic imbalance) relative to the DNA-seq baseline.
