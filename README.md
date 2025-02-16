@@ -63,7 +63,7 @@ This repository provides an R script that uses **DNA-seq allele counts** (with c
 
 2. **Execute the Script**
    ```bash
-   Rscript glm_modeling_offset.R \
+   Rscript bidirectional_edit_analysis.R \
        --dna data/dna_counts.tsv \
        --atac data/atac_counts.tsv \
        --output results/glm_results.tsv
