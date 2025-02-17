@@ -61,10 +61,8 @@ The script generates an output file containing the results of the GLM analysis i
 The script relies on the following R packages:
 
 ```R
-suppressPackageStartupMessages({
-  library(dplyr)
-  library(tidyr)
-})
+library(dplyr)
+library(tidyr)
 ```
 
 ### GLM Model
