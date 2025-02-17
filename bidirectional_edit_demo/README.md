@@ -1,7 +1,7 @@
 # UNIChro-seq Bidirectional Analysis Demo
 
 
-This repository provides an R script that uses **DNA-seq allele counts**  as an offset in a logistic regression, allowing for the detection of **allele-specific accessibility biases** in **ATAC-seq** data. 
+This repository provides an R script that uses logistic regression to detect allele-specific accessibility in **ATAC-seq data**, using **DNA-seq allele counts** as an offset.
 
 
 ## Script Overview
