@@ -4,15 +4,10 @@ This demo-script identifies caQTLs and editing biases using a generalized linear
 
 ## Script Overview
 
-- **Goal:**
-  1. Account for DNA-seq allele ratios (which might not be 50:50) by using them as an **offset**.
-  2. Perform logistic regression on ATAC-seq (`ref, alt`) counts to estimate **caQTL effects** (allelic imbalance) relative to the DNA-seq baseline.
-
 - **Column Naming Convention:**
   - **DNA-seq:** `SNP, REF, ALT` (uppercase)
   - **ATAC-seq:** `SNP, ref, alt` (lowercase)
   - Both contain a common column, `SNP`, used for joining the data frames.
-
 
 ## Usage
 
