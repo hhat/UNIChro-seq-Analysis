@@ -1,4 +1,4 @@
-# UNIChro-seq Bidirectional Analysis Script
+# UNIChro-seq Bidirectional Analysis Demo
 
 ## Overview
 This script processes a specified subset of columns from the input file and performs GLM analysis for each SNP using `ALT_dna_prob` as an offset. The output contains SNP-wise GLM results without `sample_base`, as per the updated requirement.
