@@ -76,7 +76,6 @@ model <- glm(refalt ~ offset(logit(ALT_count / (REF_count + ALT_count))) +
 
 ## Notes
 * Ensure the input file is formatted correctly with tab-separated values (TSV)
-* The script removes `sample_base` from the analysis as per the updated requirements
 * The output results are saved as a TSV file at the specified `--output` path
 
 ## License
