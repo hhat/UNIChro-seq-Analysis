@@ -21,12 +21,12 @@ The script expects an input file with the following required columns:
 
 | sample_id | SNP | ref | alt | REF_count | ALT_count | edit_direction |
 |-----------|-----|-----|-----|------------|------------|----------------|
-| R11_01_A | chr10_35126627_A_G | 248091 | 62899 | 996 | 40789 | ALT_to_REF |
-| R11_01_A | chr16_11088277_C_G | 235008 | 49465 | 651 | 2229536 | ALT_to_REF |
-| R11_01_A | chr17_40096407_G_A | 79326 | 8691 | 910 | 3669693 | ALT_to_REF |
-| R11_01_A | chr17_45895215_C_T | 42521 | 5688 | 891 | 7639938 | ALT_to_REF |
-| R11_01_A | chr17_45895714_A_G | 132974 | 4416 | 1654 | 2972277 | ALT_to_REF |
-| R11_01_A | chr20_54173204_C_G | 193096 | 3111 | 1110 | 9351338 | ALT_to_REF |
+| R11_01_A | chr10_35126627_A_G | 24809 |10628 | 99600 | 40789 | ALT_to_REF |
+| R11_01_A | chr16_11088277_C_G | 23500 | 8494 | 65122 | 29536 | ALT_to_REF |
+| R11_01_A | chr17_40096407_G_A | 7932 | 6086 | 91036 | 69693 | ALT_to_REF |
+| R11_01_A | chr17_45895215_C_T | 4252 | 1568 | 89176 | 39938 | ALT_to_REF |
+| R11_01_A | chr17_45895714_A_G | 13297 | 4044 | 165429 | 72277 | ALT_to_REF |
+| R11_01_A | chr20_54173204_C_G | 1930 | 963 | 111093 | 51338 | ALT_to_REF |
 
 ### Column Descriptions
 * `sample_id`: Unique identifier for the sample
