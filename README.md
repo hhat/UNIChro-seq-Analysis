@@ -1,69 +1,86 @@
-# README: GLM with an Offset Using DNA-seq Ratio
+# GLM Analysis Script
 
-This repository provides an R script that uses **DNA-seq allele counts** (with columns `REF, ALT`) as an offset in a logistic regression, allowing for the detection of **allele-specific accessibility biases** in **ATAC-seq** data (with columns `ref, alt`). 
+## Overview
+This script processes a specified subset of columns from the input file and performs GLM analysis for each SNP using `ALT_dna_prob` as an offset. The output contains SNP-wise GLM results without `sample_base`, as per the updated requirement.
 
----
+## Usage
 
-## Script Overview
+### Running the Script
+```bash
+Rscript glm_analysis.R --input data/input_file.tsv --output results/glm_results.tsv
+```
 
-- **Script Name:** `bidirectional_edit_analysis.R`
-- **Goal:**
-  1. Account for DNA-seq allele ratios (which might not be 50:50) by using them as an **offset**.
-  2. Perform logistic regression on ATAC-seq (`ref, alt`) counts to estimate **caQTL effects** (allelic imbalance) relative to the DNA-seq baseline.
+### Command-line Arguments
+| Argument | Description |
+|----------|-------------|
+| `--input` | Path to the input TSV file |
+| `--output` | Path to the output TSV file |
 
-- **Column Naming Convention:**
-  - **DNA-seq:** `SNP, REF, ALT` (uppercase)
-  - **ATAC-seq:** `SNP, ref, alt` (lowercase)
-  - Both contain a common column, `SNP`, used for joining the data frames.
+## Expected Input Format (`input_file.tsv`)
+The script expects an input file with the following required columns:
 
-- **GLM Model (Conceptual):**  
-  \[
-    \mathrm{cbind}( alt_{\mathrm{ATAC}},\ ref_{\mathrm{ATAC}} ) 
-    \sim 1\ +\ \mathrm{offset}\Bigl(\logit\Bigl(\frac{ALT_{\mathrm{DNA}}}{REF_{\mathrm{DNA}} + ALT_{\mathrm{DNA}}}\Bigr)\Bigr)
-  \]  
-  - Here, the **intercept** captures how much the ATAC-seq ratio deviates from the DNA-seq ratio.
+| sample_id | SNP | ref | alt | REF_count | ALT_count | edit_direction |
+|-----------|-----|-----|-----|------------|------------|----------------|
+| R11_01_A | chr10_35126627_A_G | 248091 | 62899 | 60040789 | ALT_to_REF |
+| R11_01_A | chr16_11088277_C_G | 235008 | 49465 | 12229536 | ALT_to_REF |
+| R11_01_A | chr17_40096407_G_A | 79326 | 8691 | 03669693 | ALT_to_REF |
+| R11_01_A | chr17_45895215_C_T | 42521 | 5688 | 917639938 | ALT_to_REF |
+| R11_01_A | chr17_45895714_A_G | 132974 | 4416 | 542972277 | ALT_to_REF |
+| R11_01_A | chr20_54173204_C_G | 193096 | 3111 | 09351338 | ALT_to_REF |
 
----
+### Column Descriptions
+* `sample_id`: Unique identifier for the sample
+* `SNP`: SNP ID (chromosome and position)
+* `ref`: Reference allele read count from ATAC-seq
+* `alt`: Alternative allele read count from ATAC-seq
+* `REF_count`: Reference allele read count from DNA-seq
+* `ALT_count`: Alternative allele read count from DNA-seq
+* `edit_direction`: Editing direction (`REF_to_ALT`, `ALT_to_REF`, or `NON_EDIT`)
 
-## Input Data Example
+## Output Format (`glm_results.tsv`)
+The script generates an output file containing the results of the GLM analysis in the following format:
 
-### DNA-seq (`dna_counts.tsv`)
+| SNP | effect | Estimate | Std_Error | p_value |
+|-----|---------|-----------|------------|----------|
+| chr10_35126627_A_G | Intercept | 0.1204 | 0.043 | 0.005 |
+| chr10_35126627_A_G | toALT_edit_linear | -0.0852 | 0.024 | 0.001 |
+| chr10_35126627_A_G | toALT_edit_nonlinear | 0.0501 | 0.020 | 0.012 |
 
-| SNP   | REF  | ALT  |
-|-------|------|------|
-| rs001 | 100  | 130  |
-| rs002 |  80  |  90  |
-| ...   | ...  | ...  |
+### Output Column Descriptions
+* `SNP`: The SNP ID being analyzed
+* `effect`: The coefficient term in the GLM
+  * `Intercept`: Baseline log odds ratio (how different ATAC-seq is from DNA-seq)
+  * `toALT_edit_linear`: Linear effect of the edit direction
+  * `toALT_edit_nonlinear`: Nonlinear effect of the edit direction
+* `Estimate`: The estimated coefficient value
+* `Std_Error`: Standard error of the estimate
+* `p_value`: Significance value of the estimate
 
-- `REF`: Reference allele read count  
-- `ALT`: Alternate allele read count  
+## Implementation Details
 
-### ATAC-seq (`atac_counts.tsv`)
+### Required R Libraries
+The script relies on the following R packages:
 
-| SNP   | ref  | alt  |
-|-------|------|------|
-| rs001 |  50  |  60  |
-| rs002 |  40  |  50  |
-| ...   | ...  | ...  |
+```R
+suppressPackageStartupMessages({
+  library(dplyr)
+  library(tidyr)
+})
+```
 
-- `ref`: Reference allele read count  
-- `alt`: Alternate allele read count  
+### GLM Model
+The script applies a generalized linear model (GLM) with a binomial family:
 
----
+```R
+model <- glm(refalt ~ offset(logit(ALT_count / (REF_count + ALT_count))) +
+             toALT_edit_linear + toALT_edit_nonlinear,
+             family = binomial, data = long_DF)
+```
 
-## How to Run the Script
+## Notes
+* Ensure the input file is formatted correctly with tab-separated values (TSV)
+* The script removes `sample_base` from the analysis as per the updated requirements
+* The output results are saved as a TSV file at the specified `--output` path
 
-1. **Install Dependencies**
-
-   - **R** (version 3.6 or later recommended)
-   - **CRAN Packages**: `dplyr`, `tidyr`
-     ```r
-     install.packages(c("dplyr", "tidyr"))
-     ```
-
-2. **Execute the Script**
-   ```bash
-   Rscript bidirectional_edit_analysis.R \
-       --dna data/dna_counts.tsv \
-       --atac data/atac_counts.tsv \
-       --output results/glm_results.tsv
+## License
+This project is licensed under the MIT License.
