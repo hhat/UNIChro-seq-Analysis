@@ -1,6 +1,6 @@
 # UNIChro-seq Bidirectional Analysis Demo
 
-This demo-script identifies caQTLs and editing biases by analyzing ATAC-seq UMI counts in probe-targeted regions and calculating ALT/REF count ratios from DNA-seq data.
+This demo-script identifies caQTLs and editing biases using a generalized linear model that combines UMI-counted ATAC-seq reads and DNA-seq ALT/(REF+ALT) ratios, both analyzed with allele-specific probes.
 
 ## Script Overview
 
