@@ -7,7 +7,7 @@ This script processes a specified subset of columns from the input file and perf
 
 ### Running the Script
 ```bash
-Rscript glm_analysis.R --input data/input_file.tsv --output results/glm_results.tsv
+Rscript bidirectional_analysis.R --input data/input_file.tsv --output results/glm_results.tsv
 ```
 
 ### Command-line Arguments
