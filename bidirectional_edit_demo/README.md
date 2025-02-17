@@ -2,13 +2,6 @@
 
 This demo-script identifies caQTLs and editing biases using a generalized linear model that combines UMI-counted ATAC-seq reads and DNA-seq ALT/(REF+ALT) ratios, both analyzed with allele-specific probes.
 
-## Script Overview
-
-- **Column Naming Convention:**
-  - **DNA-seq:** `SNP, REF, ALT` (uppercase)
-  - **ATAC-seq:** `SNP, ref, alt` (lowercase)
-  - Both contain a common column, `SNP`, used for joining the data frames.
-
 ## Usage
 
 ### Running the Script
