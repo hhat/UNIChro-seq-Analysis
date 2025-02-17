@@ -1,4 +1,4 @@
-# Bidirectional Edit Analysis Script
+# GLM Analysis Script
 
 ## Overview
 This script processes a specified subset of columns from the input file and performs GLM analysis for each SNP using `ALT_dna_prob` as an offset. The output contains SNP-wise GLM results without `sample_base`, as per the updated requirement.
@@ -21,12 +21,12 @@ The script expects an input file with the following required columns:
 
 | sample_id | SNP | ref | alt | REF_count | ALT_count | edit_direction |
 |-----------|-----|-----|-----|------------|------------|----------------|
-| R11_01_A | chr10_35126627_A_G | 248091 | 62899 | 60040789 | ALT_to_REF |
-| R11_01_A | chr16_11088277_C_G | 235008 | 49465 | 12229536 | ALT_to_REF |
-| R11_01_A | chr17_40096407_G_A | 79326 | 8691 | 03669693 | ALT_to_REF |
-| R11_01_A | chr17_45895215_C_T | 42521 | 5688 | 917639938 | ALT_to_REF |
-| R11_01_A | chr17_45895714_A_G | 132974 | 4416 | 542972277 | ALT_to_REF |
-| R11_01_A | chr20_54173204_C_G | 193096 | 3111 | 09351338 | ALT_to_REF |
+| R11_01_A | chr10_35126627_A_G | 248091 | 62899 | 996 | 40789 | ALT_to_REF |
+| R11_01_A | chr16_11088277_C_G | 235008 | 49465 | 651 | 2229536 | ALT_to_REF |
+| R11_01_A | chr17_40096407_G_A | 79326 | 8691 | 910 | 3669693 | ALT_to_REF |
+| R11_01_A | chr17_45895215_C_T | 42521 | 5688 | 891 | 7639938 | ALT_to_REF |
+| R11_01_A | chr17_45895714_A_G | 132974 | 4416 | 1654 | 2972277 | ALT_to_REF |
+| R11_01_A | chr20_54173204_C_G | 193096 | 3111 | 1110 | 9351338 | ALT_to_REF |
 
 ### Column Descriptions
 * `sample_id`: Unique identifier for the sample
