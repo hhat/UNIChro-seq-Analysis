@@ -1,7 +1,20 @@
 # UNIChro-seq Bidirectional Analysis Demo
 
-## Overview
-This script processes a specified subset of columns from the input file and performs GLM analysis for each SNP using `ALT_dna_prob` as an offset. The output contains SNP-wise GLM results without `sample_base`, as per the updated requirement.
+
+This repository provides an R script that uses **DNA-seq allele counts**  as an offset in a logistic regression, allowing for the detection of **allele-specific accessibility biases** in **ATAC-seq** data. 
+
+
+## Script Overview
+
+- **Goal:**
+  1. Account for DNA-seq allele ratios (which might not be 50:50) by using them as an **offset**.
+  2. Perform logistic regression on ATAC-seq (`ref, alt`) counts to estimate **caQTL effects** (allelic imbalance) relative to the DNA-seq baseline.
+
+- **Column Naming Convention:**
+  - **DNA-seq:** `SNP, REF, ALT` (uppercase)
+  - **ATAC-seq:** `SNP, ref, alt` (lowercase)
+  - Both contain a common column, `SNP`, used for joining the data frames.
+
 
 ## Usage
 
