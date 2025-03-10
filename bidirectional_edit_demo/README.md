@@ -20,8 +20,8 @@ The script expects an input file with the following required columns:
 
 | Donor | SNP | ref | alt | REF_count | ALT_count | edit_direction |
 |-----------|-----|-----|-----|------------|------------|----------------|
-| R01 | chr10_35126627_A_G | 24809 |10628 | 99600 | 40789 | ALT_to_REF |
-| R01 | chr16_11088277_C_G | 23500 | 8494 | 65122 | 29536 | ALT_to_REF |
+| R01 | rs111 | 24809 |10628 | 99600 | 40789 | ALT_to_REF |
+| R01 | rs999 | 23500 | 8494 | 65122 | 29536 | ALT_to_REF |
 
 
 ### Column Descriptions
@@ -38,8 +38,8 @@ The script generates an output file containing the results of the GLMM analysis 
 
 | SNP | effect | Estimate | Std_Error | p_value |
 |-----|---------|-----------|------------|----------|
-| chr10_35126627_A_G | Intercept | 0.1204 | 0.043 | 0.005 |
-| chr10_35126627_A_G | toALT_edit_linear | -0.0852 | 0.024 | 0.001 |
+| rs111 | Intercept | 0.1204 | 0.043 | 0.005 |
+| rs111 | toALT_edit_linear | -0.0852 | 0.024 | 0.001 |
 
 ### Output Column Descriptions
 * `SNP`: The SNP ID being analyzed
