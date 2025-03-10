@@ -31,7 +31,8 @@ cat("[INFO] Output file :", output_file, "\n")
 
 # Read input data (selecting only required columns)
 result_DF <- read.table(input_file, header = TRUE, sep = "\t", stringsAsFactors = FALSE) %>%
-  select(Donor, SNP, ref, alt, REF_count, ALT_count, edit_direction)
+  select(Donor, SNP, ref, alt, REF_count, ALT_count, edit_direction) %>% 
+  mutate(ALT_dna_prob = ALT_count / (REF_count + ALT_count))
 
 # Unique SNPs
 snps <- unique(result_DF$SNP)
@@ -43,7 +44,7 @@ for (snp in snps) {
 
   # Prepare data in long format
       long_DF <- snp_data %>%
-      select(SNP, Donor, REF_count, ALT_count, ref, alt, edit_direction) %>%
+      select(SNP, Donor, REF_count, ALT_count, ALT_dna_prob, ref, alt, edit_direction) %>%
       pivot_longer(cols = c(ref, alt),
                    names_to = "refalt",
                    values_to = "count") %>%
@@ -57,11 +58,10 @@ for (snp in snps) {
         )
       )
 
-　　# GLMM with random slope
-　　model <- glmer(refalt ~ offset(logit(ALT_dna_prob)) + toALT_edit_linear + 
-                          (1 + toALT_edit_linear | Donor),
+  # GLMM with random slope
+  model <- glmer(refalt ~ offset(logit(ALT_dna_prob)) + toALT_edit_linear + (1 + toALT_edit_linear | Donor),
                           family = binomial, data = long_DF)
-
+   fixed_effects <- summary(model)$coefficients
   # Store results
   results <- rbind(results,
     data.frame(
