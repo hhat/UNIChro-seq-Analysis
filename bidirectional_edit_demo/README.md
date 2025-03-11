@@ -12,11 +12,11 @@ Rscript bidirectional_analysis.R --input data/input_file.txt --output results/re
 ### Command-line Arguments
 | Argument | Description |
 |----------|-------------|
-| `--input` | Path to the input text file(Tab-separated) |
-| `--output` | Path to the output text file(Tab-separated) |
+| `--input` | Path to the input text file |
+| `--output` | Path to the output text file |
 
 ## Expected Input Format (`input_file.txt`)
-The script expects an input file with the following required columns:
+The script expects an tab-sepqrated input file with the following required columns:
 
 | Donor | edit_direction | SNP | ref | alt | REF_count | ALT_count |
 |--------|---------------|-----|-----|-----|-----------|-----------| 
