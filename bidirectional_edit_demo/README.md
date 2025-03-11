@@ -6,14 +6,14 @@ This demo-script identifies caQTLs and editing biases using a generalized linear
 
 ### Running the Script
 ```bash
-Rscript bidirectional_analysis.R --input data/input_file.tsv --output results/results.tsv
+Rscript bidirectional_analysis.R --input data/input_file.txt --output results/results.txt
 ```
 
 ### Command-line Arguments
 | Argument | Description |
 |----------|-------------|
-| `--input` | Path to the input TSV file |
-| `--output` | Path to the output TSV file |
+| `--input` | Path to the input text file(Tab-separated) |
+| `--output` | Path to the output text file(Tab-separated) |
 
 ## Expected Input Format (`input_file.tsv`)
 The script expects an input file with the following required columns:
@@ -90,13 +90,13 @@ library(lmerTest)
 The script applies a generalized linear mixed model (GLMM) with a binomial family:
 
 ```R
-model <- glmer(refalt ~ offset(logit(ALT_dna_prob)) + toALT_edit_linear + 
-                          (1 + toALT_edit_linear | Donor),
+model <- glmer(refalt ~ offset(logit(ALT_dna_prob)) + toALT_edit_bias + 
+                          (1 + toALT_edit_bias | Donor),
                           family = binomial, data = long_DF)
 ```
 
 ## Notes
-* Ensure the input file is formatted correctly with tab-separated values (TSV)
+* Ensure the input file is formatted correctly with tab-separated values
 * The output results are saved as a TSV file at the specified `--output` path
 * In this analysis, technical replicates were summed before processing
 
