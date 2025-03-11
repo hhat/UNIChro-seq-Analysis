@@ -1,6 +1,6 @@
 # UNIChro-seq-Analysis
 
-This repository provides analysis scripts used in the UNIChro-seq paper.
+This repository provides analysis scripts used in the UNIChro-seq paper(in preparation).
 
 ## Folder Structure
 
