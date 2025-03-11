@@ -13,7 +13,7 @@ logit <- function(p) log(p/(1-p))
 # Command-line argument parsing
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) < 2) {
-  stop("Usage: Rscript glm_analysis.R --input input_file.tsv --output output_file.tsv")
+  stop("Usage: Rscript glm_analysis.R --input input_file.txt --output output_file.txt")
 }
 
 input_file <- output_file <- NULL
