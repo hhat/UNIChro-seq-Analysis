@@ -67,9 +67,9 @@ The script generates an output file containing the results of the GLMM analysis 
 
 ### Output Column Descriptions
 * `SNP`: The SNP ID being analyzed
-* `effect`: The coefficient term in the GLM
-  * `Intercept`: Baseline log odds ratio (how different ATAC-seq is from DNA-seq)
-  * `toALT_edit_linear`: Linear effect of the edit direction
+* `effect`: The type of effect
+  * `caQTL`: caQTL effect (positive values indicate higher chromatin accessibility for ALT allele)
+  * `toALT_edit_bias`: Edit bias effect (positive values indicate bias towards ALT allele)
 * `Estimate`: The estimated coefficient value
 * `Std_Error`: Standard error of the estimate
 * `p_value`: Significance value of the estimate
