@@ -6,7 +6,7 @@ This demo-script identifies caQTLs and editing biases using a generalized linear
 
 ### Running the Script
 ```bash
-Rscript bidirectional_analysis.R --input data/input_file.txt --output results/results.txt
+Rscript bidirectional_analysis.R --input input_file.txt --output results.txt
 ```
 
 ### Command-line Arguments
