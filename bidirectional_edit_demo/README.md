@@ -16,7 +16,7 @@ Rscript bidirectional_analysis.R --input data/input_file.txt --output results/re
 | `--output` | Path to the output text file |
 
 ## Expected Input Format (`input_file.txt`)
-The script expects an tab-sepqrated input file with the following required columns:
+The script expects an tab-separated input file with the following required columns:
 
 | Donor | edit_direction | SNP | ref | alt | REF_count | ALT_count |
 |--------|---------------|-----|-----|-----|-----------|-----------| 
@@ -97,7 +97,7 @@ model <- glmer(refalt ~ offset(logit(ALT_dna_prob)) + toALT_edit_bias +
 
 ## Notes
 * Ensure the input file is formatted correctly with tab-separated values
-* The output results are saved as a TSV file at the specified `--output` path
+* The output results are saved as a tab-separated text file at the specified `--output` path
 * In this analysis, technical replicates were summed before processing
 
 ## License
