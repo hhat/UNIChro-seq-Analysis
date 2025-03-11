@@ -15,7 +15,7 @@ Rscript bidirectional_analysis.R --input data/input_file.txt --output results/re
 | `--input` | Path to the input text file(Tab-separated) |
 | `--output` | Path to the output text file(Tab-separated) |
 
-## Expected Input Format (`input_file.tsv`)
+## Expected Input Format (`input_file.txt`)
 The script expects an input file with the following required columns:
 
 | Donor | edit_direction | SNP | ref | alt | REF_count | ALT_count |
@@ -57,7 +57,7 @@ The script expects an input file with the following required columns:
 * `REF_count`: Reference allele read count from DNA-seq
 * `ALT_count`: Alternative allele read count from DNA-seq
 
-## Output Format (`results.tsv`)
+## Output Format (`results.txt`)
 The script generates an output file containing the results of the GLMM analysis in the following format:
 
 | SNP | effect | Estimate | Std_Error | p_value |
