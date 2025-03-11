@@ -1,6 +1,6 @@
 # UNIChro-seq Bidirectional Analysis Demo
 
-This demo-script identifies caQTLs and editing biases using a generalized linear mixed model that combines UMI-counted ATAC-seq reads and DNA-seq ALT/(REF+ALT) ratios, both analyzed with allele-specific probes.
+This demo-script identifies caQTLs and editing biases using a generalized linear mixed model that combines UMI-counted ATAC-seq read counts and DNA-seq ALT/(REF+ALT) ratios, both analyzed with allele-specific probes.
 
 ## Usage
 
