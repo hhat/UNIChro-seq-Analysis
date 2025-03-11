@@ -62,8 +62,8 @@ The script generates an output file containing the results of the GLMM analysis 
 
 | SNP | effect | Estimate | Std_Error | p_value |
 |-----|---------|-----------|------------|----------|
-| rs111 | Intercept | 0.1204 | 0.043 | 0.005 |
-| rs111 | toALT_edit_linear | -0.0852 | 0.024 | 0.001 |
+| rs2248137 | caQTL | 0.2006 | 0.0528 | 0.000144 |
+| rs2248137 | toALT_edit_bias | 0.0169 | 0.0316 | 0.592 |
 
 ### Output Column Descriptions
 * `SNP`: The SNP ID being analyzed
