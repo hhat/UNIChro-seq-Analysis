@@ -51,7 +51,7 @@ for (snp in snps) {
       mutate(refalt = ifelse(refalt == "alt", 1, 0)) %>%
       uncount(count) %>% 
       mutate(
-        toALT_edit_linear = case_when(
+        toALT_edit_bias = case_when(
           edit_direction == "REF_to_ALT" ~ 1,
           edit_direction == "NON_EDIT" ~ 0,
           edit_direction == "ALT_to_REF" ~ -1
@@ -59,14 +59,14 @@ for (snp in snps) {
       )
 
   # GLMM with random slope
-  model <- glmer(refalt ~ offset(logit(ALT_dna_prob)) + toALT_edit_linear + (1 + toALT_edit_linear | Donor),
+  model <- glmer(refalt ~ offset(logit(ALT_dna_prob)) + toALT_edit_bias + (1 + toALT_edit_bias | Donor),
                           family = binomial, data = long_DF)
    fixed_effects <- summary(model)$coefficients
   # Store results
   results <- rbind(results,
     data.frame(
       SNP = snp,
-      effect = c("Intercept", "toALT_edit_linear"),
+      effect = c("caQTL", "toALT_edit_bias"),
       Estimate = fixed_effects[,"Estimate"],
       Std_Error = fixed_effects[,"Std. Error"],
       p_value = fixed_effects[,"Pr(>|z|)"]
