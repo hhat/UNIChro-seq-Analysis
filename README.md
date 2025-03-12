@@ -28,3 +28,4 @@ This repository provides analysis scripts used in the UNIChro-seq paper(in prepa
 
 The [`crisper_analysis/bidirectional_edit_demo/`](./crisper_analysis/bidirectional_edit_demo/) directory includes a demonstration of bidirectional editing analysis. This showcases the implementation of bidirectional genome editing to control for allele-specific biases. For detailed information, please refer to the `README.md` within the respective directory.
 
+![Bidirectional_concept](images/Bidirectional_concept.png)
