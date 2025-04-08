@@ -84,7 +84,7 @@ create_qq_data <- function(p_values) {
   return(data.frame(expected = expected, observed = observed))
 }
 
-plot_qq <- function(p_values, title = "QQ Plot", save_path = NULL) {
+plot_qq <- function(p_values, title = "QQ Plot") {
   qq_data <- create_qq_data(p_values)
   
   max_val <- max(c(qq_data$expected, qq_data$observed)) * 1.05
@@ -112,9 +112,6 @@ plot_qq <- function(p_values, title = "QQ Plot", save_path = NULL) {
     xlim(0, max_val) + 
     ylim(0, max_val)
   
-  if (!is.null(save_path)) {
-    ggsave(save_path, plot, width = 7, height = 6)
-  }
   
   return(plot)
 }

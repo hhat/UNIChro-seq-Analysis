@@ -11,7 +11,6 @@ suppressPackageStartupMessages({
 logit <- function(p) log(p/(1-p))
 
 analyze_snp <- function(snp_data) {
-  # Prepare data in long format
   long_DF <- snp_data %>%
     select(SNP, Donor, REF_count, ALT_count, ALT_dna_prob, ref, alt, edit_direction) %>%
     pivot_longer(cols = c(ref, alt),
@@ -44,7 +43,6 @@ analyze_snp <- function(snp_data) {
 }
 
 run_analysis <- function(data) {
-  # Calculate ALT DNA probability
   result_DF <- data %>% mutate(ALT_dna_prob = round(ALT_count / (REF_count + ALT_count), digit=15)) 
 
   snps <- unique(result_DF$SNP)
@@ -77,7 +75,6 @@ main <- function(input_file, output_file) {
 # Check whether script is executed directly
 script_name <- commandArgs()[grep("--file=", commandArgs(), fixed=TRUE)]
 if (length(script_name) > 0) {  # Script is executed directly
-  # Parse command line arguments
   args <- commandArgs(trailingOnly = TRUE)
   
   # Check for required arguments format
@@ -87,10 +84,6 @@ if (length(script_name) > 0) {  # Script is executed directly
   
   input_file <- args[2]
   output_file <- args[4]
-  
-  if (!file.exists(input_file)) {
-    stop("Error: Input file '", input_file, "' does not exist.")
-  }
   
   main(input_file, output_file)
 }
