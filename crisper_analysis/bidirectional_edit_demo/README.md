@@ -22,18 +22,18 @@ The script expects an tab-separated input file with the following required colum
 
 | Donor | edit_direction | SNP | ref | alt | REF_count | ALT_count |
 |--------|---------------|-----|-----|-----|-----------|-----------| 
-| S01 | ALT_to_REF | rs2248137 | 1930 | 963 | 111093 | 51338 |
-| S01 | NON_EDIT | rs2248137 | 1303 | 1423 | 76226 | 57463 |
-| S01 | REF_to_ALT | rs2248137 | 1512 | 2016 | 68108 | 74336 |
-| S02 | ALT_to_REF | rs2248137 | 917 | 527 | 127240 | 55054 |
-| S02 | NON_EDIT | rs2248137 | 1016 | 908 | 99598 | 83489 |
-| S02 | REF_to_ALT | rs2248137 | 900 | 1188 | 65335 | 71255 |
-| S03 | ALT_to_REF | rs2248137 | 1002 | 707 | 90922 | 46997 |
+| S01 | ALT_to_REF | rs35320439 | 3906 | 1444 | 126142 | 82049 |
+| S01 | NON_EDIT | rs35320439 | 2830 | 1909 | 59753 | 74000 |
+| S01 | REF_to_ALT | rs35320439 | 2209 | 4824 | 40315 | 121156 |
+| S02 | ALT_to_REF | rs35320439 | 1877 | 914 | 127783 | 93972 |
+| S02 | NON_EDIT | rs35320439 | 1767 | 1211 | 86939 | 96592 |
+| S02 | REF_to_ALT | rs35320439 | 1183 | 2225 | 43846 | 114868 |
+| S03 | ALT_to_REF | rs35320439 | 1954 | 1046 | 79038 | 67799 |
 
 ### Column Descriptions
 * `Donor`: Unique identifier for the Donor
 * `edit_direction`: Editing direction (`REF_to_ALT`, `ALT_to_REF`, or `NON_EDIT`)
-* `SNP`: SNP ID (chromosome and position)
+* `SNP`: SNP ID
 * `ref`: Reference allele read count from ATAC-seq
 * `alt`: Alternative allele read count from ATAC-seq
 * `REF_count`: Reference allele read count from DNA-seq
@@ -44,8 +44,8 @@ The script generates an output file containing the results of the GLMM analysis 
 
 | SNP | effect | Estimate | Std_Error | p_value |
 |-----|---------|-----------|------------|----------|
-| rs2248137 | caQTL | 0.201 | 0.0528 | 0.000144 |
-| rs2248137 | toALT_edit_bias | 0.0169 | 0.0316 | 0.592 |
+| rs35320439 | caQTL | -0.339 | 0.041 | 9.14E-17 |
+| rs35320439 | toALT_edit_bias | 0.106 | 0.018  | 8.62E-09 |
 
 ### Output Column Descriptions
 * `SNP`: The SNP ID being analyzed
