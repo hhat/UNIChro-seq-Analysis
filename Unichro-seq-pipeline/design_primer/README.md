@@ -38,7 +38,7 @@ Column descriptions:
 
 
 ```bash
-./workflow/run_full_pipeline.sh example/demo.input results/my_primers "Tm=62;Window=50;CVG=0.8"
+./workflow.sh example/demo.input results/my_primers "Tm=62;Window=50;CVG=0.8"
 ```
 
 Alternatively, you can run each step individually:
@@ -66,7 +66,7 @@ script/design_primer.sh "Tm=62;Window=50;CVG=0.8;ODIR=results/my_primers"
 ```
 
 Parameter descriptions:
-- `Tm`: Target melting temperature for primers (±3°C)
+- `Tm`: Target melting temperature for primers
 - `Window`: Size of the region for primer design
 - `CVG`: Stringency of design (0-1). 1 means design primers for all SNPs by relaxing constraints, 0 means maintain strict conditions
 - `ODIR`: Output directory
@@ -85,7 +85,7 @@ This step evaluates the mapping characteristics of the designed primers to the g
 Rscript script/make_summary.R results/my_primers/demo.input results/my_primers
 ```
 
-This step integrates all information and generates the final result files `target.primers.mapinfo.txt` and `target.primers.mapinfo_oneline.txt`.
+This step integrates all information and generates the final result files `target.primers.mapinfo_oneline.txt`.
 
 ## Output Files
 
@@ -93,8 +93,7 @@ This step integrates all information and generates the final result files `targe
 - `target.primers`: Information about designed primers
 - `g38_map.allseq.summary.txt`: Mapping information for the full primer sequences
 - `g38_map.15.summary.txt`: Mapping information for the 3' end 15bp of primers
-- `target.primers.mapinfo.txt`: Integrated result file with all information
-- `target.primers.mapinfo_oneline.txt`: Result file with one line per SNP
+- `target.primers.mapinfo_oneline.txt`: Result file
 
 ## Parameter Optimization
 
