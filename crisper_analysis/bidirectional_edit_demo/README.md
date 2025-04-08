@@ -102,9 +102,8 @@ model <- glmer(refalt ~ offset(logit(ALT_dna_prob)) + toALT_edit_bias +
 A Jupyter notebook for permutation analysis is also available in this repository: [bi-directional_editing_demo_permutation.ipynb](bi-directional_editing_demo_permutation.ipynb). The notebook implements permutation tests to assess the statistical significance of allelic editing biases observed in the data. By randomly shuffling edit direction labels and comparing to actual results, these tests validate whether the observed edit biases (REF_to_ALT or ALT_to_REF) represent genuine biological phenomena rather than random variation. The QQ plot above illustrates the distribution of permutation test p-values against expected values under the null hypothesis.
 
 ## Notes
-* Ensure the input file is formatted correctly with tab-separated values
-* The output results are saved as a tab-separated text file at the specified `--output` path
-* In this analysis, technical replicates were summed before processing
+* Ensure the input file is formatted correctly with tab-separated values.
+* In this analysis, technical replicates were summed before processing.
 * GLMM p-values may slightly vary on different computing platforms and numerical libraries.
 
 ## Session Info
