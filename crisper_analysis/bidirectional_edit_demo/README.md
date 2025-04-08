@@ -98,6 +98,7 @@ model <- glmer(refalt ~ offset(logit(ALT_dna_prob)) + toALT_edit_bias +
 
 # Permutation Analysis of edit direction
 ![QQ plot from permutation analysis](images/permutation_qqplot.png)
+
 A Jupyter notebook for permutation analysis is also available in this repository: [bi-directional_editing_demo_permutation.ipynb](bi-directional_editing_demo_permutation.ipynb). The notebook implements permutation tests to assess the statistical significance of allelic editing biases observed in the data. By randomly shuffling edit direction labels and comparing to actual results, these tests validate whether the observed edit biases (REF_to_ALT or ALT_to_REF) represent genuine biological phenomena rather than random variation. The QQ plot above illustrates the distribution of permutation test p-values against expected values under the null hypothesis.
 
 ## Notes
