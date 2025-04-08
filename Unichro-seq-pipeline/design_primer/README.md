@@ -38,10 +38,16 @@ Column descriptions:
 
 
 ```bash
+export GENOME_FASTA=/home/imgishi/reference/Fasta/GRCh38/GRCh38.primary_assembly.genome.bg.fa.gz
+export BOWTIE_REF=/home/imgishi/reference/Bowtie_ref/GRCh38/GRCh38.primary_assembly
 ./workflow.sh example/demo.input results/my_primers "Tm=62;Window=50;CVG=0.8"
 ```
 
 Alternatively, you can run each step individually:
+
+### STEP 0: Set the PATH
+export GENOME_FASTA=/home/imgishi/reference/Fasta/GRCh38/GRCh38.primary_assembly.genome.bg.fa.gz
+export BOWTIE_REF=/home/imgishi/reference/Bowtie_ref/GRCh38/GRCh38.primary_assembly
 
 ### STEP 1: Prepare Input Data
 
