@@ -1,0 +1,9 @@
+Primer_ID	Basic_Covered_Seqs	Name	Forward	Identifier	ID	Basic_Binding_Position_Start_fw	Basic_Binding_Position_End_fw	primer_length_fw	gc_clamp_fw	gc_ratio_fw	no_runs_fw	no_repeats_fw	Tm_C_fw	melting_temp_diff	Self_Dimer_DeltaG	Cross_Dimer_DeltaG	Structure_deltaG	primer_coverage	Exclusion_Reason	DATA
+P1	1	chr1_12040655_C_T	ctgctgaatcgattgtggaggc	90fw	1-1|_1204|167:188|_fw	167	188	22	3	0.545454545454545	2	2	57.77	2.88	-3.892	-2.913	0	1	melting_temp_range	Inner
+P2	2	chr1_183186264_A_G	cctgatcaaggaaaaggaaggc	299fw	2-1|_1831|178:199|_fw	178	199	22	3	0.5	4	2	54.89	4.6	-1.721	-3.018	-1.16	1	melting_temp_range	Inner
+P3	3	chr1_202174197_G_C	gccaaccctgtcacacctct	421fw	3-1|_2021|172:191|_fw	172	191	20	0	0.6	3	2	59.12	4.23	-0.043	-2.308	0	1	gc_clamp	Inner
+P4	4	chr1_209611861_G_A	ttgagtttcaggcggcctgttc	527fw	4-1|_2096|162:183|_fw	162	183	22	1	0.545454545454545	3	1	59.49	4.6	-6.314	-3.018	-0.83	1	NA	Inner
+P5	1	chr1_12040655_C_T	gatgactaaagcacatctgctg	125fw	1-1|_1204|151:172|_fw	151	172	22	1	0.454545454545455	3	2	52.38	7.81	-2.115	-2.955	-2.24	1	melting_temp_range	Outer
+P6	2	chr1_183186264_A_G	cctgtcaggactgagtcaggt	163fw	2-1|_1831|138:158|_fw	138	158	21	0	0.571428571428571	2	1	57.54	5.16	-3.369	-4.31	-2.41	1	melting_temp_range	Outer
+P7	3	chr1_202174197_G_C	cccgcttcctccctgactg	320fw	3-1|_2021|132:150|_fw	132	150	19	1	0.684210526315789	3	1	60.19	7.81	0.472	-4.31	0	1	gc_ratio	Outer
+P8	4	chr1_209611861_G_A	atctcaggggagctgggtctag	507fw	4-1|_2096|127:148|_fw	127	148	22	1	0.590909090909091	4	2	59.45	7.07	-2.295	-3.658	-2.5	1	NA	Outer
