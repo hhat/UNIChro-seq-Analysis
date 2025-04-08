@@ -25,14 +25,14 @@ The script can also be used interactively by sourcing it in an R session:
 source("bidirectional_analysis.R")
 
 # Read your data
-input_file<-"path/to/your/input_file.txt"
+input_file<-"path/to/input_file.txt"
 data <- read.table(input_file, header = TRUE, sep = "\t", stringsAsFactors = FALSE)
 
 # Run the analysis
 results <- run_analysis(data)
 
 # Write results to file
-write_results(results, "path/to/your/output_file.txt")
+write_results(results, "path/to/results.txt")
 ```
 
 ## Expected Input Format (`input_file.txt`)
