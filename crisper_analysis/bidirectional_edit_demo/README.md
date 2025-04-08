@@ -17,6 +17,29 @@ Rscript bidirectional_analysis.R --input input_file.txt --output results.txt
 | `--input` | Path to the input text file |
 | `--output` | Path to the output text file |
 
+### Interactive Usage in R
+The script can also be used interactively by sourcing it in an R session:
+
+```R
+# Source the script
+source("bidirectional_analysis.R")
+
+# Read your data
+data <- read_input_data("path/to/your/input_file.txt")
+
+# Run the analysis
+results <- run_analysis(data)
+
+# Write results to file
+write_results(results, "path/to/your/output_file.txt")
+
+# Or use the main function to run the entire pipeline
+results <- main("path/to/your/input_file.txt", "path/to/your/output_file.txt")
+```
+
+### Jupyter Notebook
+A Jupyter notebook example is also available in this repository. The notebook provides a step-by-step walkthrough of the analysis with visualizations and detailed explanations.
+
 ## Expected Input Format (`input_file.txt`)
 The script expects an tab-separated input file with the following required columns:
 
@@ -66,6 +89,7 @@ library(dplyr)
 library(tidyr)
 library(lme4)
 library(lmerTest)
+library(ggplot2)
 ```
 
 ### GLMM Model
@@ -81,6 +105,46 @@ model <- glmer(refalt ~ offset(logit(ALT_dna_prob)) + toALT_edit_bias +
 * Ensure the input file is formatted correctly with tab-separated values
 * The output results are saved as a tab-separated text file at the specified `--output` path
 * In this analysis, technical replicates were summed before processing
+* GLMM p-values may slightly vary when running this analysis on different computing platforms and numerical libraries.
+
+## Session Info
+R version 4.1.3 (2022-03-10)
+Platform: x86_64-conda-linux-gnu (64-bit)
+Running under: Red Hat Enterprise Linux 8.8 (Ootpa)
+
+Matrix products: default
+BLAS/LAPACK: [conda environment library path]/libopenblasp-r0.3.21.so
+
+locale:
+ [1] LC_CTYPE=ja_JP.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=ja_JP.UTF-8        LC_COLLATE=ja_JP.UTF-8    
+ [5] LC_MONETARY=ja_JP.UTF-8    LC_MESSAGES=ja_JP.UTF-8   
+ [7] LC_PAPER=ja_JP.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=ja_JP.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] lmerTest_3.1-3 lme4_1.1-35.4  Matrix_1.6-5   tidyr_1.3.1    dplyr_1.1.4   
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.12         nloptr_1.2.2.3      pillar_1.9.0       
+ [4] compiler_4.1.3      base64enc_0.1-3     tools_4.1.3        
+ [7] boot_1.3-30         digest_0.6.35       uuid_1.2-0         
+[10] gtable_0.3.5        jsonlite_1.8.8      evaluate_0.24.0    
+[13] lifecycle_1.0.4     tibble_3.2.1        nlme_3.1-165       
+[16] lattice_0.22-6      pkgconfig_2.0.3     rlang_1.1.4        
+[19] IRdisplay_1.1       cli_3.6.3           IRkernel_1.3.2     
+[22] fastmap_1.2.0       withr_3.0.0         repr_1.1.7         
+[25] generics_0.1.3      vctrs_0.6.5         grid_4.1.3         
+[28] tidyselect_1.2.1    glue_1.7.0          R6_2.5.1           
+[31] fansi_1.0.6         minqa_1.2.7         pbdZMQ_0.3-11      
+[34] ggplot2_3.5.1       purrr_1.0.2         magrittr_2.0.3     
+[37] scales_1.3.0        htmltools_0.5.8.1   splines_4.1.3      
+[40] MASS_7.3-60.0.1     colorspace_2.1-0    numDeriv_2016.8-1.1
+[43] utf8_1.2.4          munsell_0.5.1       crayon_1.5.3       
 
 ## License
 This project is licensed under the MIT License.
