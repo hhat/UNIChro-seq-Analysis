@@ -33,9 +33,6 @@ results <- run_analysis(data)
 
 # Write results to file
 write_results(results, "path/to/your/output_file.txt")
-
-# Or use the main function to run the entire pipeline
-results <- main("path/to/your/input_file.txt", "path/to/your/output_file.txt")
 ```
 
 ### Jupyter Notebook
