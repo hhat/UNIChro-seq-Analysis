@@ -17,7 +17,7 @@ run_analysis_perm <- function(data, seed = 12345) {
     long_DF <- snp_data %>%
       select(SNP, Donor, REF_count, ALT_count, ALT_dna_prob, ref, alt, edit_direction) %>%
       pivot_longer(cols = c(ref, alt),
-                 names_to = "refalt",w
+                 names_to = "refalt",
                  values_to = "count") %>%
       mutate(refalt = ifelse(refalt == "alt", 1, 0)) %>%
       uncount(count)
