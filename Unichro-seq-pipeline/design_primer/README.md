@@ -20,7 +20,7 @@ This pipeline designs optimal nested multiplex primers for specified SNPs and ev
 
 ## Usage
 
-### Input File Format (The script expects an tab-separated input file)
+### Input File Format (Tab-separated required)
 
 Example of `demo.input`: 
 ```
