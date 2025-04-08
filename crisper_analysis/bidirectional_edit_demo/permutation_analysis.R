@@ -1,19 +1,16 @@
 #!/usr/bin/env Rscript
-# Permutation analysis functions for bidirectional editing analysis
+
 source("bidirectional_analysis.R")
 
 run_analysis_perm <- function(data, seed = 12345) {
-  # Set seed
   set.seed(seed)
   
-  # Calculate ALT DNA probability
   result_DF <- data %>% mutate(ALT_dna_prob = round(ALT_count / (REF_count + ALT_count), digit=15)) 
   
   snps <- unique(result_DF$SNP)
   
   results <- data.frame()
   
-  # Process each SNP
   for(snp in snps) {
     snp_data <- result_DF %>% filter(SNP == snp)
     
@@ -25,7 +22,6 @@ run_analysis_perm <- function(data, seed = 12345) {
       mutate(refalt = ifelse(refalt == "alt", 1, 0)) %>%
       uncount(count)
     
-    # Permute the edit_direction at the long format level
     long_DF <- long_DF %>%
       group_by(Donor, SNP) %>%
       mutate(
@@ -59,68 +55,23 @@ run_analysis_perm <- function(data, seed = 12345) {
   return(results)
 }
 
-
-# Permutation function with real-time progress for Jupyter
 run_permutation <- function(data, n_permutations = 100, seed = 123) {
   results_list <- list()
+  
   base_seed <- seed
-  
-  # Setup progress display
-  message("Starting permutation analysis with ", n_permutations, " iterations")
-  
-  for(i in 1:n_permutations) {
-    if(i %% 10 == 0 || i == 1 || i == n_permutations) {
-      message("Completed permutation ", i, " of ", n_permutations)
-    }
     
     iter_seed <- base_seed + i
+    
     perm_results <- run_analysis_perm(data, seed = iter_seed)
     
     perm_results$permutation <- i
     results_list[[i]] <- perm_results
   }
   
-  message("Permutation analysis complete!")
-  
   all_results <- bind_rows(results_list)
   return(all_results)
 }
 
-# Permutation function that generates unique seeds for each iteration
-run_permutation <- function(data, n_permutations = 100, seed = 123) {
-  results_list <- list()
-  
-  # Use provided seed as base seed
-  base_seed <- seed
-  
-  # Progress counter with flush
-  cat("Starting permutation analysis with", n_permutations, "iterations\n")
-  flush.console()
-  
-  for(i in 1:n_permutations) {
-    if(i %% 10 == 0 || i == 1 || i == n_permutations) {
-      cat("Completed permutation", i, "of", n_permutations, "\n")
-      flush.console()
-    }
-    
-    iter_seed <- base_seed + i
-    
-    perm_results <- run_analysis_perm(data, seed = iter_seed)
-    
-    # Save results
-    perm_results$permutation <- i
-    results_list[[i]] <- perm_results
-  }
-  
-  cat("Permutation analysis complete!\n")
-  flush.console()
-  
-  # Combine results
-  all_results <- bind_rows(results_list)
-  return(all_results)
-}
-
-# QQ plot data creation function
 create_qq_data <- function(p_values) {
   n <- length(p_values)
   expected <- -log10((1:n) / (n+1))
@@ -129,7 +80,6 @@ create_qq_data <- function(p_values) {
   return(data.frame(expected = expected, observed = observed))
 }
 
-# Function to create and display QQ plot
 plot_qq <- function(p_values, title = "QQ Plot", save_path = NULL) {
   qq_data <- create_qq_data(p_values)
   
@@ -158,7 +108,6 @@ plot_qq <- function(p_values, title = "QQ Plot", save_path = NULL) {
     xlim(0, max_val) + 
     ylim(0, max_val)
   
-  # Save the plot if a path is specified
   if (!is.null(save_path)) {
     ggsave(save_path, plot, width = 7, height = 6)
   }

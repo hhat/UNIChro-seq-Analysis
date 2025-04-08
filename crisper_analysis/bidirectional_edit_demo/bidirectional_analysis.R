@@ -1,7 +1,5 @@
 #!/usr/bin/env Rscript
-# Bidirectional analysis functions
 
-# Load required libraries
 suppressPackageStartupMessages({
   library(dplyr)
   library(tidyr)
@@ -10,10 +8,8 @@ suppressPackageStartupMessages({
   library(ggplot2)
 })
 
-# Helper function for logit transformation
 logit <- function(p) log(p/(1-p))
 
-# Function to analyze a single SNP
 analyze_snp <- function(snp_data) {
   # Prepare data in long format
   long_DF <- snp_data %>%
@@ -36,10 +32,8 @@ analyze_snp <- function(snp_data) {
                  (1 + toALT_edit_bias | Donor),
                  family = binomial, data = long_DF)
   
-  # Get fixed effects
   fixed_effects <- summary(model)$coefficients
   
-  # Return results
   return(data.frame(
     SNP = unique(snp_data$SNP),
     effect_type = c("caQTL", "toALT_edit_bias"),
@@ -49,7 +43,6 @@ analyze_snp <- function(snp_data) {
   ))
 }
 
-# Function to run analysis on full dataset
 run_analysis <- function(data) {
   # Calculate ALT DNA probability
   result_DF <- data %>% mutate(ALT_dna_prob = round(ALT_count / (REF_count + ALT_count), digit=15)) 
@@ -57,7 +50,6 @@ run_analysis <- function(data) {
   snps <- unique(result_DF$SNP)
   results <- data.frame()
   
-  # Process each SNP
   for (snp in snps) {
     snp_data <- result_DF %>% filter(SNP == snp)
     snp_results <- analyze_snp(snp_data)
@@ -67,17 +59,14 @@ run_analysis <- function(data) {
   return(results)
 }
 
-# Function to read input data
 read_input_data <- function(input_file) {
   read.table(input_file, header = TRUE, sep = "\t", stringsAsFactors = FALSE)
 }
 
-# Function to write results
 write_results <- function(results, output_file) {
   write.table(results, file = output_file, sep = "\t", quote = FALSE, row.names = FALSE)
 }
 
-# Main function to run the entire pipeline
 main <- function(input_file, output_file) {
   data <- read_input_data(input_file)
   results <- run_analysis(data)
@@ -85,7 +74,7 @@ main <- function(input_file, output_file) {
   return(results)
 }
 
-# Check if script is being executed directly
+# Check whether script is executed directly
 script_name <- commandArgs()[grep("--file=", commandArgs(), fixed=TRUE)]
 if (length(script_name) > 0) {  # Script is executed directly
   # Parse command line arguments
@@ -96,15 +85,12 @@ if (length(script_name) > 0) {  # Script is executed directly
     stop("Error: Invalid arguments.\nUsage: Rscript bidirectional_analysis.R --input input_file.txt --output results.txt")
   }
   
-  # Get file paths
   input_file <- args[2]
   output_file <- args[4]
   
-  # Verify input file exists
   if (!file.exists(input_file)) {
     stop("Error: Input file '", input_file, "' does not exist.")
   }
   
-  # Run analysis
   main(input_file, output_file)
 }
