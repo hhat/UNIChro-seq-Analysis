@@ -1,7 +1,6 @@
 #!/bin/sh
 parameters=$1
 
-# Suppress BLAS to use multiple CPUs
 export MKL_NUM_THREADS=1
 export OMP_NUM_THREADS=1
 export MKL_DOMAIN_NUM_THREADS=1

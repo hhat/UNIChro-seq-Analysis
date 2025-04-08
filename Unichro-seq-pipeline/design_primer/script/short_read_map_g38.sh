@@ -13,8 +13,6 @@ echo "Parameter3: this number of 3-end bases are used for mapping (or 'all' for 
 
 mkdir -p $ODIR
 
-
-# prepare input file
 if [ "$Nbase" = "all" ]; then
     # If Nbase is "all", use the full sequence
     cat $IFILE | awk '{ print ">" $1; print $2 }' > $ODIR/input.fa
@@ -27,10 +25,8 @@ else
 fi
 
 
- #mapping
 bowtie --all -v $maxmismatch -x $REF -f $ODIR/input.fa > $ODIR/g38_map.org.txt
 
- #formatting
 echo "ID Chr Position Strand N_mismatch Mismatch_info" |
 perl -pe "s/ /\t/g" > $ODIR/g38_map.summary.txt
 

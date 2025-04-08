@@ -137,7 +137,7 @@ optimal.primers <- design_primers(
 
 outer_info <- optimal.primers$opti
 
-#This makes error unless you have already installed MELTING and  OligoArrayAux
+#This makes error withoutMELTING and OligoArrayAux
 outer_info <- outer_info[,c("Forward","Basic_Covered_Seqs", "Identifier", "ID",
     "Basic_Binding_Position_Start_fw", "Basic_Binding_Position_End_fw",
    "primer_length_fw", "gc_clamp_fw", "gc_ratio_fw", "no_runs_fw", "no_repeats_fw",
