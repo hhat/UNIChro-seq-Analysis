@@ -48,9 +48,9 @@ run_analysis_perm <- function(data, seed = 12345) {
     results <- rbind(results,
       data.frame(
         SNP = snp,
-        effect = c("caQTL", "toALT_edit_bias"),
-        Estimate = fixed_effects[,"Estimate"],
-        Std_Error = fixed_effects[,"Std. Error"],
+        effect_type = c("caQTL", "toALT_edit_bias"),
+        Effect_size = fixed_effects[,"Estimate"],
+        SE = fixed_effects[,"Std. Error"],
         p_value = fixed_effects[,"Pr(>|z|)"]
       )
     )

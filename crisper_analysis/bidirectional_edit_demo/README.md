@@ -60,19 +60,19 @@ The script expects an tab-separated input file with the following required colum
 ## Output Format (`results.txt`)
 The script generates an output file containing the results of the GLMM analysis in the following format:
 
-| SNP | effect | Estimate | Std_Error | p_value |
+| SNP | effect_type | Effect_size | SE | p_value |
 |-----|---------|-----------|------------|----------|
 | rs35320439 | caQTL | -0.339 | 0.041 | 9.14E-17 |
 | rs35320439 | toALT_edit_bias | 0.106 | 0.018  | 8.62E-09 |
 
 ### Output Column Descriptions
 * `SNP`: The SNP ID being analyzed
-* `effect`: The type of effect
+* `effect_type`: The type of effect
   * `caQTL`: caQTL effect (positive values indicate higher chromatin accessibility for ALT allele)
   * `toALT_edit_bias`: Edit bias effect (positive values indicate bias towards ALT allele)
-* `Estimate`: The estimated coefficient value
-* `Std_Error`: Standard error of the estimate
-* `p_value`: Significance value of the estimate
+* `Effect_size`: The magnitude and direction of the effect in log-odds scale
+* `SE`: Standard error of the effect size
+* `p_value`: Significance value of the effect size
 
 ## Implementation Details
 
@@ -96,14 +96,15 @@ model <- glmer(refalt ~ offset(logit(ALT_dna_prob)) + toALT_edit_bias +
                           family = binomial, data = long_DF)
 ```
 
-# Jupyter Notebook
-A Jupyter notebook for permutation analysis is also available in this repository: [bi-directional_editing_demo.ipynb](bi-directional_editing_demo.ipynb). The notebook demonstrates the application of permutation tests to evaluate the statistical significance of the findings and displays the results with visualizations. 
+# Permutation Analysis of edit direction
+![QQ plot from permutation analysis](images/permutation_qqplot.png)
+A Jupyter notebook for permutation analysis is also available in this repository: [bi-directional_editing_demo_permutation.ipynb](bi-directional_editing_demo_permutation.ipynb). The notebook implements permutation tests to assess the statistical significance of allelic editing biases observed in the data. By randomly shuffling edit direction labels and comparing to actual results, these tests validate whether the observed edit biases (REF_to_ALT or ALT_to_REF) represent genuine biological phenomena rather than random variation. The QQ plot above illustrates the distribution of permutation test p-values against expected values under the null hypothesis.
 
 ## Notes
 * Ensure the input file is formatted correctly with tab-separated values
 * The output results are saved as a tab-separated text file at the specified `--output` path
 * In this analysis, technical replicates were summed before processing
-* GLMM p-values may slightly vary when running this analysis on different computing platforms and numerical libraries.
+* GLMM p-values may slightly vary on different computing platforms and numerical libraries.
 
 ## Session Info
 R version 4.1.3 (2022-03-10)

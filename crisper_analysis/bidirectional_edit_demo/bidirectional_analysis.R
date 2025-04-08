@@ -42,9 +42,9 @@ analyze_snp <- function(snp_data) {
   # Return results
   return(data.frame(
     SNP = unique(snp_data$SNP),
-    effect = c("caQTL", "toALT_edit_bias"),
-    Estimate = fixed_effects[,"Estimate"],
-    Std_Error = fixed_effects[,"Std. Error"],
+    effect_type = c("caQTL", "toALT_edit_bias"),
+    Effect_size = fixed_effects[,"Estimate"],
+    SE = fixed_effects[,"Std. Error"],
     p_value = fixed_effects[,"Pr(>|z|)"]
   ))
 }
