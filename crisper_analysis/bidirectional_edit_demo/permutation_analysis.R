@@ -17,7 +17,7 @@ run_analysis_perm <- function(data, seed = 12345) {
     long_DF <- snp_data %>%
       select(SNP, Donor, REF_count, ALT_count, ALT_dna_prob, ref, alt, edit_direction) %>%
       pivot_longer(cols = c(ref, alt),
-                 names_to = "refalt",
+                 names_to = "refalt",w
                  values_to = "count") %>%
       mutate(refalt = ifelse(refalt == "alt", 1, 0)) %>%
       uncount(count)
@@ -57,16 +57,20 @@ run_analysis_perm <- function(data, seed = 12345) {
 
 run_permutation <- function(data, n_permutations = 100, seed = 123) {
   results_list <- list()
-  
   base_seed <- seed
+  
+  # Setup progress display
+  message("Starting permutation analysis with ", n_permutations, " iterations")
+  
+  for(i in 1:n_permutations) {
     
     iter_seed <- base_seed + i
-    
     perm_results <- run_analysis_perm(data, seed = iter_seed)
     
     perm_results$permutation <- i
     results_list[[i]] <- perm_results
   }
+  
   
   all_results <- bind_rows(results_list)
   return(all_results)
