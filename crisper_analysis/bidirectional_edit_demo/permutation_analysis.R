@@ -59,9 +59,6 @@ run_permutation <- function(data, n_permutations = 100, seed = 123) {
   results_list <- list()
   base_seed <- seed
   
-  # Setup progress display
-  message("Starting permutation analysis with ", n_permutations, " iterations")
-  
   for(i in 1:n_permutations) {
     
     iter_seed <- base_seed + i
