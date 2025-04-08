@@ -43,6 +43,8 @@ analyze_snp <- function(snp_data) {
 }
 
 run_analysis <- function(data) {
+
+#digit=15 is required to ensure the reproducibility
   result_DF <- data %>% mutate(ALT_dna_prob = round(ALT_count / (REF_count + ALT_count), digit=15)) 
 
   snps <- unique(result_DF$SNP)

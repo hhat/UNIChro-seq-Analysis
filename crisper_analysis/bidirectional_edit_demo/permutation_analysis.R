@@ -4,7 +4,8 @@ source("bidirectional_analysis.R")
 
 run_analysis_perm <- function(data, seed = 12345) {
   set.seed(seed)
-  
+
+##digit=15 is required to ensure the reproducibility
   result_DF <- data %>% mutate(ALT_dna_prob = round(ALT_count / (REF_count + ALT_count), digit=15)) 
   
   snps <- unique(result_DF$SNP)

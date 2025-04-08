@@ -6,7 +6,7 @@ sample_id=${2}
 num_reads=${3}
 
 seed=$(echo "1234 + ($num_reads * 1000)" | bc)
-seed=${seed%.*}  # 小数点以下を削除
+seed=${seed%.*} 
 
 export PATH=/home/ha7477/tools/miniconda3/envs/de/bin::${PATH}
 
@@ -15,7 +15,6 @@ R2=${wd}/trim_fastq/${sample_id}_val_2.fq.gz
 od=${wd}/downsampling_fastq
 mkdir -p ${od}/${num_reads}
 
-# num_readsで指定したリード数にダウンサンプリング
 /home/ha7477/tools/miniconda3/envs/de/bin/seqtk sample -s${seed} ${R1} ${num_reads} | gzip > ${od}/${num_reads}/${sample_id}_${num_reads}_R1.fastq.gz
 /home/ha7477/tools/miniconda3/envs/de/bin/seqtk sample -s${seed} ${R2} ${num_reads} | gzip > ${od}/${num_reads}/${sample_id}_${num_reads}_R2.fastq.gz
 
