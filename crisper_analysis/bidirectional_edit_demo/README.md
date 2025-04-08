@@ -35,9 +35,6 @@ results <- run_analysis(data)
 write_results(results, "path/to/your/output_file.txt")
 ```
 
-### Jupyter Notebook
-A Jupyter notebook example is also available in this repository. The notebook provides a step-by-step walkthrough of the analysis with visualizations and detailed explanations.
-
 ## Expected Input Format (`input_file.txt`)
 The script expects an tab-separated input file with the following required columns:
 
@@ -98,6 +95,9 @@ model <- glmer(refalt ~ offset(logit(ALT_dna_prob)) + toALT_edit_bias +
                           (1 + toALT_edit_bias | Donor),
                           family = binomial, data = long_DF)
 ```
+
+# Jupyter Notebook
+A Jupyter notebook for permutation analysis is also available in this repository: [bi-directional_editing_demo.ipynb](bi-directional_editing_demo.ipynb). The notebook demonstrates the application of permutation tests to evaluate the statistical significance of the findings and displays the results with visualizations. 
 
 ## Notes
 * Ensure the input file is formatted correctly with tab-separated values
