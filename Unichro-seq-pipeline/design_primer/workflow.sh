@@ -11,20 +11,9 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/script"
 
 mkdir -p $OUTPUT_DIR
 
-# Copy input file to output directory if not already there
-if [ "$INPUT_FILE" != "$OUTPUT_DIR/$(basename $INPUT_FILE)" ]; then
-    cp $INPUT_FILE $OUTPUT_DIR/
-fi
+cp -f "$INPUT_FILE" "$OUTPUT_DIR/"
 
 INPUT_BASENAME=$(basename $INPUT_FILE)
-
-echo "=========================================="
-echo "UNIChro-seq Nested Multiplex Primer Design"
-echo "=========================================="
-echo "Input file: $INPUT_FILE"
-echo "Output directory: $OUTPUT_DIR"
-echo "Parameters: $PARAMETERS"
-echo "=========================================="
 
 # step1 creating FASTA file
 $SCRIPT_DIR/prepare_fastq.sh $OUTPUT_DIR/$INPUT_BASENAME $OUTPUT_DIR
@@ -39,7 +28,4 @@ $SCRIPT_DIR/evaluate_primer.sh $OUTPUT_DIR
 # step4: summary
 Rscript $SCRIPT_DIR/make_summary.R $OUTPUT_DIR/$INPUT_BASENAME $OUTPUT_DIR
 
-echo "=========================================="
-echo "Results are available in: $OUTPUT_DIR"
 echo "- Result summary: $OUTPUT_DIR/target.primers.mapinfo_oneline.txt"
-echo "==========================================="
