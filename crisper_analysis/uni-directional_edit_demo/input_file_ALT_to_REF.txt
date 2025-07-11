@@ -1,0 +1,3 @@
+Donor	SNP	NON_EDITED_DNA_count	EDITED_DNA_count	non_edited_atac_count	edited_atac_count
+S06	rs58107865	52671	5705	8966	966
+S07	rs58107865	46944	9097	9178	1807

@@ -13,20 +13,20 @@ This repository provides analysis scripts used in the UNIChro-seq paper (in prep
     - `workflow.sh`: Workflow script for DNA-seq analysis.
       
 - **`crisper_analysis/`**  
-  - **`bidirectional_edit_demo/`**: Contains a demo of bidirectional editing.
+  - **`demo/`**: Contains a demo of detecting a caQTL effect using unidirectional editing.
     - `README.md`: Documentation for the demo.
-    - `bidirectional_analysis.R`: R script for bidirectional analysis.
-    - `input_file.txt`: Input file example.
-    - `result.txt`: Analysis result example.
+    - `uni-directional_analysis.R`: R script for .
+    - `input_file_REF_to_ALT.txt`: Input file example.
+    - `results_REF_to_ALT.txt`: Analysis result example.
+    - `input_file_ALT_to_REF.txt`: Input file example.
+    - `results_ALT_to_REF.txt`: Analysis result example.
   - **`CRISPResso2/`**: Contains scripts for analysis using CRISPResso2.
   
 - **`others/`**
-  - **`RNA-seq/`**: Contains scripts for RNA-seq data analysis.
+  - **`siLEF1_RNA-seq/`**: Contains scripts for siLEF1 RNA-seq data analysis.
   - **`siLEF1_ATAC-seq/`**: Contains scripts for siLEF1 ATAC-seq data analysis.
 
-## Bidirectional Editing Demo
+## uni-directional Editing Demo
 
-The [`crisper_analysis/bidirectional_edit_demo/`](./crisper_analysis/bidirectional_edit_demo/) directory includes a demonstration of bidirectional editing analysis. This showcases the implementation of bidirectional genome editing to control for allele-specific biases. For detailed information, please refer to the `README.md` within the respective directory.
-
-![Bidirectional_concept](crisper_analysis/bidirectional_edit_demo/images/Bidirectional_concept.png)
+The [`crisper_analysis/uni-directional_edit_demo/`](./crisper_analysis/uni-directional_edit_demo/) directory includes a demonstration of uni-directional editing analysis. For detailed information, please refer to the `README.md` within the respective directory.
 

@@ -12,46 +12,35 @@ logit <- function(p) log(p/(1-p))
 
 analyze_snp <- function(snp_data) {
   long_DF <- snp_data %>%
-    select(SNP, Donor, REF_count, ALT_count, ALT_dna_prob, ref, alt, edit_direction) %>%
-    pivot_longer(cols = c(ref, alt),
-                 names_to = "refalt",
+    select(Donor, SNP ,NON_EDITED_DNA_count, EDITED_DNA_count, non_edited_atac_count, edited_atac_count) %>%
+    mutate(EDITED_DNA_prob = round(EDITED_DNA_count / (NON_EDITED_DNA_count + EDITED_DNA_count), digit=15)) %>%
+    pivot_longer(cols = c(non_edited_atac_count, edited_atac_count),
+                 names_to = "edit_type",
                  values_to = "count") %>%
-    mutate(refalt = ifelse(refalt == "alt", 1, 0)) %>%
-    uncount(count) %>% 
-    mutate(
-      toALT_edit_bias = case_when(
-        edit_direction == "REF_to_ALT" ~ 1,
-        edit_direction == "NON_EDIT" ~ 0,
-        edit_direction == "ALT_to_REF" ~ -1
-      )
-    )
+    mutate(edit_type = ifelse(edit_type == "edited_atac_count", 1, 0)) %>%
+    uncount(count)
   
   # GLMM with random slope
-  model <- glmer(refalt ~ offset(logit(ALT_dna_prob)) + toALT_edit_bias + 
-                 (1 + toALT_edit_bias | Donor),
+  model <- glmer(edit_type ~ offset(logit(EDITED_DNA_prob)) + (1 | Donor),
                  family = binomial, data = long_DF)
   
   fixed_effects <- summary(model)$coefficients
   
   return(data.frame(
-    SNP = unique(snp_data$SNP),
-    effect_type = c("caQTL", "toALT_edit_bias"),
-    Effect_size = fixed_effects[,"Estimate"],
-    SE = fixed_effects[,"Std. Error"],
-    p_value = fixed_effects[,"Pr(>|z|)"]
+    SNP = unique(long_DF$SNP),
+    Effect_size = fixed_effects[1,"Estimate"],
+    SE = fixed_effects[1,"Std. Error"],
+    p_value = fixed_effects[1,"Pr(>|z|)"]
   ))
 }
 
 run_analysis <- function(data) {
 
-#digit=15 is required to ensure the reproducibility
-  result_DF <- data %>% mutate(ALT_dna_prob = round(ALT_count / (REF_count + ALT_count), digit=15)) 
-
-  snps <- unique(result_DF$SNP)
+  snps <- unique(data$SNP)
   results <- data.frame()
   
   for (snp in snps) {
-    snp_data <- result_DF %>% filter(SNP == snp)
+    snp_data <- data %>% filter(SNP == snp)
     snp_results <- analyze_snp(snp_data)
     results <- rbind(results, snp_results)
   }
@@ -81,7 +70,7 @@ if (length(script_name) > 0) {  # Script is executed directly
   
   # Check for required arguments format
   if (length(args) < 4 || args[1] != "--input" || args[3] != "--output") {
-    stop("Error: Invalid arguments.\nUsage: Rscript bidirectional_analysis.R --input input_file.txt --output results.txt")
+    stop("Error: Invalid arguments.\nUsage: Rscript bidirectional_analysis.R --input input_file --output output_file")
   }
   
   input_file <- args[2]
