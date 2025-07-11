@@ -15,7 +15,7 @@ This repository provides analysis scripts used in the UNIChro-seq paper (in prep
       * `script/`: Contains scripts for primer design and evaluation.
       * `workflow.sh`: Workflow script for primer design.
 * `crispr_analysis/`
-   * `uni-directional_edit_demo/`: Contains a demo of detecting a caQTL effect using uni-directional editing.
+      * `uni-directional_edit_demo/`: Contains a demo for detecting caQTL effects using uni-directional editing in homozygous samples (REF/REF or ALT/ALT).      
       * `README.md`: Documentation for the demo.
       * `uni-directional_analysis.R`: R script for main analysis.
       * `uni-directional_editing_demo.ipynb`: Jupyter notebook for the demo.
@@ -31,7 +31,7 @@ This repository provides analysis scripts used in the UNIChro-seq paper (in prep
 
 ## Uni-directional Editing Demo
 
-The `crispr_analysis/uni-directional_edit_demo/` directory includes a demonstration of uni-directional editing analysis. For detailed information, please refer to the `README.md` within the respective directory.
+The `crispr_analysis/uni-directional_edit_demo/` directory includes a demonstration of uni-directional editing analysis for homozygous samples (REF/REF or ALT/ALT). For detailed information, please refer to the `README.md` within the respective directory.
 
 ## License
 

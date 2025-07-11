@@ -2,7 +2,7 @@
 
 ![uni-directional_concept](images/uni-directional_concept.png)
 
-This demo-script identifies caQTLs from homogeneous samples using a generalized linear mixed model that combines UMI-counted ATAC-seq read counts and DNA-seq ALT/(REF+ALT) ratios, both analyzed with allele-specific probes.
+This demo-script identifies caQTLs from homozygous samples (REF/REF or ALT/ALT) using a generalized linear mixed model that combines UMI-counted ATAC-seq read counts and DNA-seq ALT/(REF+ALT) ratios, both analyzed with allele-specific probes.
 
 ## Usage
 
@@ -22,7 +22,7 @@ The script can also be used interactively by sourcing it in an R session:
 
 ```R
 # Source the script
-source("ui-directional_analysis.R")
+source("uni-directional_analysis.R")
 
 # Read your data
 input_file<-"path/to/input_file"
