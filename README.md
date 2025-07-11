@@ -13,13 +13,13 @@ This repository provides analysis scripts used in the UNIChro-seq paper (in prep
     - `workflow.sh`: Workflow script for DNA-seq analysis.
       
 - **`crisper_analysis/`**  
-  - **`demo/`**: Contains a demo of detecting a caQTL effect using unidirectional editing.
+  - **`demo/`**: Contains a demo of detecting a caQTL effect using uni-directional editing.
     - `README.md`: Documentation for the demo.
-    - `uni-directional_analysis.R`: R script for .
+    - `uni-directional_analysis.R`: R script for main analysis.
     - `input_file_REF_to_ALT.txt`: Input file example.
     - `results_REF_to_ALT.txt`: Analysis result example.
-    - `input_file_ALT_to_REF.txt`: Input file example.
-    - `results_ALT_to_REF.txt`: Analysis result example.
+    - `input_file_ALT_to_REF.txt`: Input file example2.
+    - `results_ALT_to_REF.txt`: Analysis result example2.
   - **`CRISPResso2/`**: Contains scripts for analysis using CRISPResso2.
   
 - **`others/`**
