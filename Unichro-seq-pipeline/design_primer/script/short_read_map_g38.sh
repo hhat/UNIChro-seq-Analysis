@@ -24,14 +24,11 @@ else
     }' > $ODIR/input.fa
 fi
 
+bowtie $REF $ODIR/input.fa -f --all -v $maxmismatch > $ODIR/g38_map.org.txt 2>$ODIR/bowtie.err
 
-bowtie --all -v $maxmismatch -x $REF -f $ODIR/input.fa > $ODIR/g38_map.org.txt
+echo "ID Chr Position Strand N_mismatch Mismatch_info" | perl -pe "s/ /\t/g" > $ODIR/g38_map.summary.txt
 
-echo "ID Chr Position Strand N_mismatch Mismatch_info" |
-perl -pe "s/ /\t/g" > $ODIR/g38_map.summary.txt
-
-cat $ODIR/g38_map.org.txt |
-awk 'BEGIN{FS="\t";OFS="\t"}{
+cat $ODIR/g38_map.org.txt | awk 'BEGIN{FS="\t";OFS="\t"}{
    ID=$1;
    Strand=$2;
    Chr=$3;
