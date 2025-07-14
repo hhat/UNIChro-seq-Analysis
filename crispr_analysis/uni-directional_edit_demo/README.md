@@ -58,7 +58,7 @@ The script generates an output file containing the results of the GLMM analysis 
 
 | SNP | Effect_size | SE | p_value |
 |-----|-----------|------------|----------|
-| rs58107865 | caQTL | 0.623070912099292 | 0.0388983763436045 | 9.58083459593302e-58 |
+| rs58107865 | 0.623070912099292 | 0.0388983763436045 | 9.58083459593302e-58 |
 
 ### Output Column Descriptions
 * `SNP`: The SNP ID being analyzed

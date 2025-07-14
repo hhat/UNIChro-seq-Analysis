@@ -137,7 +137,10 @@ optimal.primers <- design_primers(
 
 outer_info <- optimal.primers$opti
 
-#This makes error withoutMELTING and OligoArrayAux
+OFILE_outer=paste0(ODIR,"/outer_info.rds")
+saveRDS(outer_info, file = OFILE_outer)
+
+#This makes error unless you have already installed MELTING and  OligoArrayAux
 outer_info <- outer_info[,c("Forward","Basic_Covered_Seqs", "Identifier", "ID",
     "Basic_Binding_Position_Start_fw", "Basic_Binding_Position_End_fw",
    "primer_length_fw", "gc_clamp_fw", "gc_ratio_fw", "no_runs_fw", "no_repeats_fw",
