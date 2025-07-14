@@ -14,7 +14,7 @@ This repository provides analysis scripts used in the UNIChro-seq paper (in prep
    * `design_primer/`
       * `script/`: Contains scripts for primer design and evaluation.
       * `workflow.sh`: Workflow script for primer design.
-* `crispr_analysis/`
+   * `crispr_analysis/`
       * `uni-directional_edit_demo/`: Contains a demo for detecting caQTL effects using uni-directional editing in homozygous samples (REF/REF or ALT/ALT).      
       * `README.md`: Documentation for the demo.
       * `uni-directional_analysis.R`: R script for main analysis.
@@ -25,7 +25,7 @@ This repository provides analysis scripts used in the UNIChro-seq paper (in prep
       * `results_ALT_to_REF.txt`: Analysis result example2.
       * `images/`: Contains concept images for the demo.
    * `CRISPResso2/`: Contains scripts for analysis using CRISPResso2.
-* `others/`
+   * `others/`
    * `siLEF1_RNA-seq/`: Contains scripts for siLEF1 RNA-seq data analysis.
    * `siLEF1_ATAC-seq/`: Contains scripts for siLEF1 ATAC-seq data analysis.
 
