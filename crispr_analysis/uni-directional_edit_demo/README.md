@@ -86,9 +86,7 @@ The script applies a generalized linear mixed model (GLMM) with a binomial famil
   model <- glmer(edit_type ~ offset(logit(EDITED_DNA_prob)) + (1 | Donor),
                  family = binomial, data = long_DF)
 ```
-Where:
-
-`EDITED_DNA_prob = EDITED_DNA_count / (NON_EDITED_DNA_count + EDITED_DNA_count)`
+Where: `EDITED_DNA_prob = EDITED_DNA_count / (NON_EDITED_DNA_count + EDITED_DNA_count)`
 
 ## Notes
 * Ensure the input file is formatted correctly with tab-separated values.
