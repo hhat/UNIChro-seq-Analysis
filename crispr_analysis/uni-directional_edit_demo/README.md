@@ -87,6 +87,7 @@ The script applies a generalized linear mixed model (GLMM) with a binomial famil
                  family = binomial, data = long_DF)
 ```
 Where: `EDITED_DNA_prob = EDITED_DNA_count / (NON_EDITED_DNA_count + EDITED_DNA_count)`
+`edit_type` is a binary response variable derived from ATAC-seq read counts (0 = non-edited, 1 = edited).
 
 ## Notes
 * Ensure the input file is formatted correctly with tab-separated values.
