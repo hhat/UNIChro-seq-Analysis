@@ -31,7 +31,7 @@ This repository provides analysis scripts used in the UNIChro-seq paper (in prep
 
 ## Uni-directional Editing Demo
 
-The `crispr_analysis/uni-directional_edit_demo/` directory includes a demonstration of uni-directional editing analysis for homozygous samples (REF/REF or ALT/ALT). For detailed information, please refer to the `README.md` within the respective directory.
+The [`crispr_analysis/uni-directional_edit_demo/`](crispr_analysis/uni-directional_edit_demo/) directory includes a demonstration of uni-directional editing analysis for homozygous samples (REF/REF or ALT/ALT). For detailed information, please refer to the `README.md` within the respective directory.
 
 ## License
 

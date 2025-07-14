@@ -97,7 +97,7 @@ Platform: x86_64-conda-linux-gnu (64-bit)
 Running under: Red Hat Enterprise Linux 8.8 (Ootpa)
 
 Matrix products: default
-BLAS/LAPACK: /rshare1/ZETTAI_path_WA_slash_home_KARA/home/ha7477/tools/miniconda3/envs/de/lib/libopenblasp-r0.3.21.so
+BLAS/LAPACK: /home/ha7477/tools/miniconda3/envs/de/lib/libopenblasp-r0.3.21.so
 
 locale:
  [1] LC_CTYPE=ja_JP.UTF-8       LC_NUMERIC=C              
