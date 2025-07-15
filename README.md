@@ -1,6 +1,7 @@
 # UNIChro-seq-Analysis
 
 This repository provides analysis scripts used in the UNIChro-seq paper (in preparation).
+[![DOI](https://zenodo.org/badge/800069394.svg)](https://doi.org/10.5281/zenodo.15892171)
 
 ## Folder Structure
 
