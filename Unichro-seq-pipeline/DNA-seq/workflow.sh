@@ -15,7 +15,7 @@ ORGPATH=$( echo $PATH )
 export PATH=/home/imgishi/miniconda3/envs/genetics1/bin:/home/imgishi/miniconda3/condabin:/home/imgishi/miniconda3/bin:/home/imgishi/wd/crisprqtl/script:$PATH
 
 #####################################################################
-# 1. Experiment information files
+# Experiment information files
 #####################################################################
 
 # Generate sample ID list
@@ -25,17 +25,17 @@ sed -e "s/_R1_001.fastq.gz//g" |
 grep -v Undetermined > info/2024-06-17.samples
 
 #####################################################################
-# 2. FASTQC
+# 1. FASTQC
 #####################################################################
 
 qsub -pe def_slot 1 \
    -l s_vmem=10G,mem_req=10G \
    -cwd \
    -t 1:16 \
-   ./script/02_fastqc-2024-06-17.sh
+   ./script/01_fastqc-2024-06-17.sh
 
 #####################################################################
-# 3. Adapter trimming with Cutadapt
+# 2. Adapter trimming with Cutadapt
 #####################################################################
 
 # Submit cutadapt job array
@@ -43,7 +43,7 @@ qsub -pe def_slot 1 \
    -l s_vmem=20G,mem_req=20G \
    -cwd \
    -t 1:16 \
-   ./script/03_cutadapt-2024-06-17.sh
+   ./script/02_cutadapt-2024-06-17.sh
 
 # Generate read count summary
 mkdir -p analysis/2024-06-17/read_count
@@ -58,37 +58,37 @@ done
 
 
 #####################################################################
-# 4. Bowtie2
+# 3. Bowtie2
 #####################################################################
 
 qsub -pe def_slot 4 \
    -l s_vmem=10G,mem_req=10G \
    -cwd \
    -t 1:16 \
-   ./script/04_bowtie2-2024-06-17.sh
+   ./script/03_bowtie2-2024-06-17.sh
 
 #####################################################################
-# 5. Split BAM files by target regions
-#####################################################################
-
-qsub -pe def_slot 1 \
-   -l s_vmem=10G,mem_req=10G \
-   -cwd \
-   -t 1:16 \
-   ./script/05_split_bam_q30-2024-06-17.sh
-
-#####################################################################
-# 6. Allele-specific read extraction
+# 4. Split BAM files by target regions
 #####################################################################
 
 qsub -pe def_slot 1 \
    -l s_vmem=10G,mem_req=10G \
    -cwd \
    -t 1:16 \
-   ./script/06_allele_split_bam-2024-06-17.sh
+   ./script/04_split_bam_q30-2024-06-17.sh
 
 #####################################################################
-# 7. Allele counting from split BAM files
+# 5. Allele-specific read extraction
+#####################################################################
+
+qsub -pe def_slot 1 \
+   -l s_vmem=10G,mem_req=10G \
+   -cwd \
+   -t 1:16 \
+   ./script/05_allele_split_bam-2024-06-17.sh
+
+#####################################################################
+# 6. Allele counting from split BAM files
 #####################################################################
 
 # Count reads for each allele

@@ -11,86 +11,86 @@ cd ${wd}
 ORGPATH=$( echo $PATH )
 
 #####################################################################
-# 1. Experiment information files
+# Experiment information files
 #####################################################################
 
 # Set data directory
 dd=/home/imgkono/data/img/miseq/20231130/Fastq
 
-# 1.1 Generate sample ID list
+# Generate sample ID list
 ls $dd |
 grep "R1_001.fastq.gz" |
 sed -e "s/_R1_001.fastq.gz//g" |
 grep -v Undetermined > info/2023-11-30.samples
 
-# 1.2 Create sample-barcode pair information
+# Create sample-barcode pair information
 echo "01_S1_L001 CTCTCTAT
 02_S2_L001 TATCCTCT
 03_S3_L001 GTAAGGAG" > info/2023-11-30.sample_barcode_pair
 
 #####################################################################
-# 2. FASTQC
+# 1. FASTQC
 #####################################################################
 
 qsub -pe def_slot 1 \
    -l s_vmem=10G,mem_req=10G \
    -cwd \
    -t 1:3 \
-   ./script/02_fastqc-2023-11-30.sh
+   ./script/01_fastqc-2023-11-30.sh
 
 #####################################################################
-# 3. Add UMI (extract first 17 bases from Read1)
-#####################################################################
-
-qsub -pe def_slot 1 \
-   -l s_vmem=10G,mem_req=10G \
-   -cwd \
-   -t 1:3 \
-   ./script/03_add_umi-2023-11-30.sh
-
-#####################################################################
-# 4. Demultiplex samples using custom barcodes
+# 2. Add UMI (extract first 17 bases from Read1)
 #####################################################################
 
 qsub -pe def_slot 1 \
    -l s_vmem=10G,mem_req=10G \
    -cwd \
    -t 1:3 \
-   ./script/04_demultiplex-2023-11-30.sh
+   ./script/02_add_umi-2023-11-30.sh
 
 #####################################################################
-# 5. Adapter trimming with Cutadapt
+# 3. Demultiplex samples using custom barcodes
 #####################################################################
 
 qsub -pe def_slot 1 \
    -l s_vmem=10G,mem_req=10G \
    -cwd \
    -t 1:3 \
-   ./script/05_cutadapt-2023-11-30.sh
+   ./script/03_demultiplex-2023-11-30.sh
 
 #####################################################################
-# 6. Bowtie2 
+# 4. Adapter trimming with Cutadapt
+#####################################################################
+
+qsub -pe def_slot 1 \
+   -l s_vmem=10G,mem_req=10G \
+   -cwd \
+   -t 1:3 \
+   ./script/04_cutadapt-2023-11-30.sh
+
+#####################################################################
+# 5. Bowtie2
 #####################################################################
 
 qsub -pe def_slot 4 \
    -l s_vmem=10G,mem_req=10G \
    -cwd \
    -t 1:3 \
-   ./script/06_bowtie2-2023-11-30.sh
+   ./script/05_bowtie2-2023-11-30.sh
 
 
 #####################################################################
-# 7. Split BAM files by target regions
+# 6. Split BAM files by target regions
 #####################################################################
 
 qsub -pe def_slot 1 \
    -l s_vmem=10G,mem_req=10G \
    -cwd \
    -t 1:3 \
-   ./script/07_split_bam_q30-2023-11-30.sh
+   ./script/06_split_bam_q30-2023-11-30.sh
 
 #####################################################################
-# 8. UMI counting
+# 7. UMI counting
 #####################################################################
 
 batch=20231130
@@ -98,11 +98,11 @@ batch=20231130
      -l s_vmem=64G \
      -cwd \
      -t 1:27 \
-     ./script/08_umi_count_prep_R11_v1.sh ${batch}
+     ./script/07_umi_count_prep_R11_v1.sh ${batch}
 
 
 #####################################################################
-# 9. Filter UMI data
+# 8. Filter UMI data
 #####################################################################
 
 batch=20231130
@@ -111,4 +111,4 @@ batch=20231130
     qsub -pe def_slot 1 \
        -l s_vmem=4G \
        -cwd \
-       ./script/09_filter_v12.sh ${size_cutoff} ${count_cutoff} ${batch}
+       ./script/08_filter_v12.sh ${size_cutoff} ${count_cutoff} ${batch}

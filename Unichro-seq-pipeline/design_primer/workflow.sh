@@ -27,25 +27,25 @@ echo "Output directory: $OUTPUT_DIR"
 echo "Parameters: $PARAMETERS"
 echo "=========================================="
 
-# STEP 1: Already done (Input file preparation)
-echo "[STEP 1] Input data preparation completed"
+# Input file preparation is completed before running this workflow.
+echo "Input data preparation completed"
 
-# STEP 2: Create FASTA files
-echo "[STEP 2] Creating FASTA files..."
-$SCRIPT_DIR/02_prepare_fastq.sh $OUTPUT_DIR/$INPUT_BASENAME $OUTPUT_DIR
+# STEP 1: Create FASTA files
+echo "[STEP 1] Creating FASTA files..."
+$SCRIPT_DIR/01_prepare_fastq.sh $OUTPUT_DIR/$INPUT_BASENAME $OUTPUT_DIR
 
-# STEP 3: Design primers
-echo "[STEP 3] Designing primers..."
+# STEP 2: Design primers
+echo "[STEP 2] Designing primers..."
 FULL_PARAMS="$PARAMETERS;ODIR=$OUTPUT_DIR;IFILE=$OUTPUT_DIR/$INPUT_BASENAME"
-$SCRIPT_DIR/03_design_primer.sh "$FULL_PARAMS"
+$SCRIPT_DIR/02_design_primer.sh "$FULL_PARAMS"
 
-# STEP 4: Evaluate primer mapping
-echo "[STEP 4] Evaluating primer mapping..."
-$SCRIPT_DIR/04_evaluate_primer.sh $OUTPUT_DIR
+# STEP 3: Evaluate primer mapping
+echo "[STEP 3] Evaluating primer mapping..."
+$SCRIPT_DIR/03_evaluate_primer.sh $OUTPUT_DIR
 
-# STEP 5: Summarize results
-echo "[STEP 5] Summarizing results..."
-Rscript $SCRIPT_DIR/05_make_summary.R $OUTPUT_DIR/$INPUT_BASENAME $OUTPUT_DIR
+# STEP 4: Summarize results
+echo "[STEP 4] Summarizing results..."
+Rscript $SCRIPT_DIR/04_make_summary.R $OUTPUT_DIR/$INPUT_BASENAME $OUTPUT_DIR
 
 echo "=========================================="
 echo "Pipeline completed"

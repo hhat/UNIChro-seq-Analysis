@@ -16,7 +16,7 @@ barcode=$( cat -n $sample_barcode_file | awk -v jobid=$jobid '{if($1==jobid){pri
 fastqR1=/home/imgkono/data/img/novaseq/${batch}/Fastq/${id}_R1_001.fastq.gz
 ODIR=bowtie/${batch}/${id}.${barcode}
 demultiplex_dir=demultiplex/${batch}
-Rscript=script/08_umi_count_v12.R
+Rscript=script/07_umi_count_v12.R
 
 ALL_UMI_FILE="$ODIR/all_R1.umi.gz"
 if [ ! -f "$ALL_UMI_FILE" ]; then
