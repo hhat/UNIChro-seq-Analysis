@@ -54,11 +54,27 @@ tools. Recorded command-line tool versions are listed below.
 | CRISPResso2 | v2.3.1 |
 | tabix/bgzip | htslib v1.12 |
 
-R packages used by the scripts include openPrimeR v1.20.0, DESeq2 v1.34.0,
-data.table, magrittr, dplyr, tidyr, tidyverse, ggplot2, lme4, lmerTest,
-ATACseqQC, Rsamtools, and TxDb.Hsapiens.UCSC.hg38.knownGene. R 4.2.1 and the
-package versions listed in `crispr_analysis/uni-directional_edit_demo/README.md`
-were recorded for the runnable uni-directional editing demo.
+Recorded R package versions include:
+
+| R package | Version |
+| --- | --- |
+| openPrimeR | v1.20.0 |
+| DESeq2 | v1.34.0 |
+| data.table | v1.16.4 |
+| magrittr | v2.0.3 |
+| dplyr | v1.1.4 |
+| tidyr | v1.3.1 |
+| tidyverse | v2.0.0 |
+| ggplot2 | v3.5.1 |
+| lme4 | v1.1-35.3 |
+| lmerTest | v3.1-3 |
+| ATACseqQC | v1.18.1 |
+| Rsamtools | v2.14.0 |
+| TxDb.Hsapiens.UCSC.hg38.knownGene | v3.16.0 |
+
+R v4.2.1 and full package session information were recorded for the runnable
+uni-directional editing demo in
+`crispr_analysis/uni-directional_edit_demo/README.md`.
 
 External reference files are required but not included in this repository,
 including GRCh38 FASTA and Bowtie2 indexes, a STAR index, GENCODE gene
