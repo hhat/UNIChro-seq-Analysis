@@ -36,7 +36,7 @@ qsub -pe def_slot 1 \
    -l s_vmem=10G,mem_req=10G \
    -cwd \
    -t 1:3 \
-   ./script/fastqc-2023-11-30.sh
+   ./script/02_fastqc-2023-11-30.sh
 
 #####################################################################
 # 3. Add UMI (extract first 17 bases from Read1)
@@ -46,7 +46,7 @@ qsub -pe def_slot 1 \
    -l s_vmem=10G,mem_req=10G \
    -cwd \
    -t 1:3 \
-   ./script/add_umi-2023-11-30.sh
+   ./script/03_add_umi-2023-11-30.sh
 
 #####################################################################
 # 4. Demultiplex samples using custom barcodes
@@ -56,7 +56,7 @@ qsub -pe def_slot 1 \
    -l s_vmem=10G,mem_req=10G \
    -cwd \
    -t 1:3 \
-   ./script/demultiplex-2023-11-30.sh
+   ./script/04_demultiplex-2023-11-30.sh
 
 #####################################################################
 # 5. Adapter trimming with Cutadapt
@@ -66,7 +66,7 @@ qsub -pe def_slot 1 \
    -l s_vmem=10G,mem_req=10G \
    -cwd \
    -t 1:3 \
-   ./script/cutadapt-2023-11-30.sh
+   ./script/05_cutadapt-2023-11-30.sh
 
 #####################################################################
 # 6. Bowtie2 
@@ -76,7 +76,7 @@ qsub -pe def_slot 4 \
    -l s_vmem=10G,mem_req=10G \
    -cwd \
    -t 1:3 \
-   ./script/bowtie2-2023-11-30.sh
+   ./script/06_bowtie2-2023-11-30.sh
 
 
 #####################################################################
@@ -87,10 +87,10 @@ qsub -pe def_slot 1 \
    -l s_vmem=10G,mem_req=10G \
    -cwd \
    -t 1:3 \
-   ./script/split_bam_q30-2023-11-30.sh
+   ./script/07_split_bam_q30-2023-11-30.sh
 
 #####################################################################
-# 9. UMI counting
+# 8. UMI counting
 #####################################################################
 
 batch=20231130
@@ -98,11 +98,11 @@ batch=20231130
      -l s_vmem=64G \
      -cwd \
      -t 1:27 \
-     ./script/umi_count_prep_R11_v1.sh ${batch}
+     ./script/08_umi_count_prep_R11_v1.sh ${batch}
 
 
 #####################################################################
-# 10. Filter UMI data 
+# 9. Filter UMI data
 #####################################################################
 
 batch=20231130
@@ -111,4 +111,4 @@ batch=20231130
     qsub -pe def_slot 1 \
        -l s_vmem=4G \
        -cwd \
-       ./script/filter_v12.sh ${size_cutoff} ${count_cutoff} ${batch}
+       ./script/09_filter_v12.sh ${size_cutoff} ${count_cutoff} ${batch}

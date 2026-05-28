@@ -8,7 +8,7 @@ export MKL_DOMAIN_NUM_THREADS=1
 
 script_dir=$(dirname "$0")
 
-Rscript ${script_dir}/design_primer.R $parameters
+Rscript ${script_dir}/03_design_primer.R $parameters
     #"Tm=62;Window=50;CVG=0.8;ODIR=target/demo": parameters (optimise as needed)
     #Tm: melting temperature of primer +/- 3 from this value
     #Dist_snp is not included in this version (specified in the input file)

@@ -8,7 +8,7 @@ This demo-script identifies caQTLs from homozygous samples (REF/REF or ALT/ALT) 
 
 ### Running the Script
 ```bash
-Rscript uni-directional_analysis.R --input input_file --output output_file
+Rscript 01_uni-directional_analysis.R --input input_file --output output_file
 ```
 
 ### Command-line Arguments
@@ -22,7 +22,7 @@ The script can also be used interactively by sourcing it in an R session:
 
 ```R
 # Source the script
-source("uni-directional_analysis.R")
+source("01_uni-directional_analysis.R")
 
 # Read your data
 input_file<-"path/to/input_file"

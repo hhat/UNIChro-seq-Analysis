@@ -16,7 +16,7 @@ barcode=$( cat -n $sample_barcode_file | awk -v jobid=$jobid '{if($1==jobid){pri
 fastqR1=/home/imgkono/data/img/novaseq/${batch}/Fastq/${id}_R1_001.fastq.gz
 ODIR=bowtie/${batch}/${id}.${barcode}
 demultiplex_dir=demultiplex/${batch}
-Rscript=script/umi_count_v10.R
+Rscript=script/08_umi_count_v12.R
 
 ALL_UMI_FILE="$ODIR/all_R1.umi.gz"
 if [ ! -f "$ALL_UMI_FILE" ]; then
@@ -95,7 +95,7 @@ cat $locus_info | awk '{print $1}' | while read snpid; do
       print UMI, R1_1st_base, R2_1st_base, CIGAR, size, sequence, Strand
     }' |
     grep -F $alt_probe > $ODIR/$snpid/$snpid.alt_umi_info
-   
+
     samtools view -f 162 $BAM |
     grep -F -v "XS:i:" - |
     awk 'BEGIN{FS="\t"}{

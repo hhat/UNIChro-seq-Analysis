@@ -32,7 +32,7 @@ qsub -pe def_slot 1 \
    -l s_vmem=10G,mem_req=10G \
    -cwd \
    -t 1:16 \
-   ./script/fastqc-2024-06-17.sh
+   ./script/02_fastqc-2024-06-17.sh
 
 #####################################################################
 # 3. Adapter trimming with Cutadapt
@@ -43,7 +43,7 @@ qsub -pe def_slot 1 \
    -l s_vmem=20G,mem_req=20G \
    -cwd \
    -t 1:16 \
-   ./script/cutadapt-2024-06-17.sh
+   ./script/03_cutadapt-2024-06-17.sh
 
 # Generate read count summary
 mkdir -p analysis/2024-06-17/read_count
@@ -58,37 +58,37 @@ done
 
 
 #####################################################################
-# 5. Bowtie2
+# 4. Bowtie2
 #####################################################################
 
 qsub -pe def_slot 4 \
    -l s_vmem=10G,mem_req=10G \
    -cwd \
    -t 1:16 \
-   ./script/bowtie2-2024-06-17.sh
+   ./script/04_bowtie2-2024-06-17.sh
 
 #####################################################################
-# 6. Split BAM files by target regions
-#####################################################################
-
-qsub -pe def_slot 1 \
-   -l s_vmem=10G,mem_req=10G \
-   -cwd \
-   -t 1:16 \
-   ./script/split_bam_q30-2024-06-17.sh
-
-#####################################################################
-# 7. Allele-specific read extraction
+# 5. Split BAM files by target regions
 #####################################################################
 
 qsub -pe def_slot 1 \
    -l s_vmem=10G,mem_req=10G \
    -cwd \
    -t 1:16 \
-   ./script/allele_split_bam-2024-06-17.sh
+   ./script/05_split_bam_q30-2024-06-17.sh
 
 #####################################################################
-# 8. Allele counting from split BAM files
+# 6. Allele-specific read extraction
+#####################################################################
+
+qsub -pe def_slot 1 \
+   -l s_vmem=10G,mem_req=10G \
+   -cwd \
+   -t 1:16 \
+   ./script/06_allele_split_bam-2024-06-17.sh
+
+#####################################################################
+# 7. Allele counting from split BAM files
 #####################################################################
 
 # Count reads for each allele
