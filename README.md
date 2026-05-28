@@ -16,7 +16,7 @@ should be edited before reuse.
 * `crispr_analysis/CRISPResso2/`: CRISPR editing outcome analysis.
 * `crispr_analysis/uni-directional_edit_demo/`: runnable demo for uni-directional editing analysis.
 * `others/umiATAC/`: auxiliary UMI-ATAC comparison analysis.
-* `others/siLEF1_RNA-seq/` and `others/siLEF1_ATAC-seq/`: auxiliary siLEF1 RNA-seq and ATAC-seq analyses.
+* `others/siLEF1_RNA-seq/` and `others/siLEF1_ATAC-seq/`: auxiliary RNA-seq and ATAC-seq analysis scripts.
 
 ## Script Order
 
@@ -24,17 +24,35 @@ The analysis scripts have numbered file names (`01_`, `02_`, etc.) within each
 analysis directory. These prefixes indicate the order in which the scripts were
 run. `workflow.sh` files provide the corresponding command sequence for the main
 UNIChro-seq primer-design, ATAC-seq, and DNA-seq workflows. Files beginning with
-`00_` are helper wrappers, and `20_`-series siLEF1 ATAC-seq scripts are
-Target17/figure-support analyses.
+`00_` are helper wrappers. In `others/siLEF1_ATAC-seq/`, the `20_`-series files
+are separate auxiliary scripts rather than a continuation of the main numbered
+workflow.
 
 ## Software Requirements
 
 The scripts were written for an SGE/qsub-based Linux HPC environment using
-`bash`/`sh`, `Rscript`, and standard Unix tools. The main command-line tools are
-`bcl2fastq` 2.20.0.422, FastQC, Cutadapt v2.6, Bowtie2 v2.2.6, Bowtie v1.3.1,
-Samtools v1.9, bedtools, Bcftools v1.12, Picard v2.26.2, MACS2 v2.2.7.1, GATK
-4.2.0.0, STAR v2.7.9a, RNA-SeQC2 v2.4.2, seqtk, featureCounts, CRISPResso2,
-tabix/bgzip, and conda-managed local environments.
+`bash`/`sh`, `Rscript`, conda-managed local environments, and standard Unix
+tools. Recorded command-line tool versions are listed below.
+
+| Tool | Version |
+| --- | --- |
+| bcl2fastq | v2.20.0.422 |
+| FastQC | v0.11.9 |
+| Cutadapt | v2.6 |
+| Bowtie2 | v2.2.6 |
+| Bowtie | v1.3.1 |
+| Samtools | v1.9 |
+| bedtools | v2.29.1 |
+| Bcftools | v1.12 |
+| Picard | v2.26.2 |
+| MACS2 | v2.2.7.1 |
+| GATK | v4.2.0.0 |
+| STAR | v2.7.9a |
+| RNA-SeQC2 | v2.4.2 |
+| seqtk | v1.2-r94 |
+| featureCounts | v2.0.3 |
+| CRISPResso2 | v2.3.1 |
+| tabix/bgzip | htslib v1.12 |
 
 R packages used by the scripts include openPrimeR v1.20.0, DESeq2 v1.34.0,
 data.table, magrittr, dplyr, tidyr, tidyverse, ggplot2, lme4, lmerTest,
