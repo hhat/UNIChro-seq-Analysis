@@ -82,6 +82,30 @@ annotations, 1000 Genomes VCFs, a b37-to-hg38 chain file, ENCODE/hg38 blacklist
 regions, and project-specific locus, probe, guide RNA, barcode, and sample
 information files.
 
+## Citation
+
+If you use this repository, please cite the following publication:
+
+> Kono, M.<sup>†</sup> & Hatano, H.<sup>†</sup> et al. Accurate, sensitive,
+> and efficient chromatin accessibility quantification at target loci using
+> UNIChro-seq. *Nature Communications* (2026).
+> https://doi.org/10.1038/s41467-026-75767-2
+>
+> <sup>†</sup>Michihiro Kono and Hiroaki Hatano contributed equally to this work.
+
+### Software archive
+
+The analysis code in this repository is archived on Zenodo. Please cite it as:
+
+> Hatano, H. (2026). hhat/UNIChro-seq-Analysis: v1.2 [Computer software].
+> Zenodo. https://doi.org/10.5281/zenodo.20423205
+
+* Version DOI (this release): https://doi.org/10.5281/zenodo.20423205
+* All-versions DOI (always resolves to the latest): https://doi.org/10.5281/zenodo.15892171
+
+A machine-readable citation is provided in `CITATION.cff` and is available
+through the GitHub "Cite this repository" feature.
+
 ## License
 
 This project is licensed under the terms of the LICENSE file included in this
