@@ -86,12 +86,9 @@ information files.
 
 If you use this repository, please cite the following publication:
 
-> Kono, M.<sup>†</sup> & Hatano, H.<sup>†</sup> et al. Accurate, sensitive,
-> and efficient chromatin accessibility quantification at target loci using
-> UNIChro-seq. *Nature Communications* (2026).
-> https://doi.org/10.1038/s41467-026-75767-2
->
-> <sup>†</sup>Michihiro Kono and Hiroaki Hatano contributed equally to this work.
+> Kono, M. & Hatano, H. et al. Accurate, sensitive, and efficient chromatin
+> accessibility quantification at target loci using UNIChro-seq.
+> *Nature Communications* (2026). https://doi.org/10.1038/s41467-026-75767-2
 
 ### Software archive
 
